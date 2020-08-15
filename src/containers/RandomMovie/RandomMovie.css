@@ -1,0 +1,78 @@
+
+/* Mobile */
+@media (min-width: 320px) {
+    .MovieContainer {
+        position: relative;
+        height: 240px;
+        margin-top: 150px;
+    }
+}
+
+/* Mobile */
+@media (min-width: 360px) {
+    .MovieContainer {
+        position: relative;
+        height: 280px;
+        margin-top: 180px;
+    }
+}
+
+/* Mobile */
+@media (width: 375px) and (height: 812px) {
+    .MovieContainer {
+        position: relative;
+        height: 350px;
+        margin-top: 200px;
+    }
+}
+
+/* Mobile */
+@media (width: 411px) and (height: 823px) {
+    .MovieContainer {
+        position: relative;
+        height: 350px;
+        margin-top: 200px;
+    }
+}
+
+
+/* Mobile */
+@media (min-width: 411px) {
+    .MovieContainer {
+        position: relative;
+        height: 300px;
+    }
+}
+
+/* Mobile */
+@media (min-width: 414px) {
+    .MovieContainer {
+        position: relative;
+        height: 350px;
+    }
+}
+
+/*   Desktop  */
+@media (min-width: 500px) {
+    .MovieContainer {
+        position: relative;
+        height: 100%;
+        margin-top: 120px;
+    }
+
+    .Load {
+        position: relative;
+        height: 100%;
+        margin-top: 120px;
+        animation: sharpen 3s both;
+    }
+}
+
+@keyframes sharpen {
+    from {
+        filter: blur(20px);
+    }
+    to {
+        filter: blur(none);
+    }
+}

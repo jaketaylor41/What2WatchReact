@@ -1,0 +1,157 @@
+
+ .ButtonContainer {
+  text-align: center;
+}
+
+.ButtonDiv {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  position: absolute;
+  justify-content: space-evenly;
+  left: 0;
+  right: 0;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 850px;
+} 
+
+.ShuffleButton {
+  font-weight: 400;
+  color: #fff;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid #5d6475;
+  padding: 1rem 1.3rem;
+  line-height: 1;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  outline:none;
+}
+
+.ShuffleButton:hover {
+  background-color: #F5F5F5;
+  box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15);
+  border-color: #343d52 ;
+}
+
+.ShuffleButton:focus {
+    outline: none;
+}
+.ShuffleButton i {
+  padding: 5px 0 0 0;
+  color: #343d52;
+}
+
+.RightButton {
+  flex: 1;
+  align-self: center;
+}
+
+.WatchListBtn {
+  background: transparent;
+  border: none;
+  margin-top: 3%;
+  font-size: 1.2rem;
+  transition: all 0.15s ease;
+}
+
+.WatchListBtn i:hover {
+  color: #f5f5f5;
+}
+
+.WatchListBtn span {
+  display: block;
+  font-size: 15px;
+  font-family: inherit;
+}
+
+.WatchListBtn:focus {
+  outline: none;
+}
+
+.InvisibleLeft {
+  flex: 1;
+}
+
+
+/* Mobile - Iphone 5/SE */
+ /* @media (min-width: 320px) {
+
+    .ButtonDiv {
+        margin-top: 20% ;
+    }
+
+    .ShuffleButton {
+        font-size: 2rem;
+      }
+
+}  */
+
+
+/* Desktop */
+ @media (min-width: 500px) {
+    .ShuffleButton {
+        font-size: 3rem;
+    }
+
+    .ButtonDiv {
+      margin-top: 600px;
+    }
+} 
+
+@media (min-width: 980px) {
+  .ShuffleButton {
+      font-size: 3rem;
+  }
+
+  .ButtonDiv {
+    margin-top: 650px;
+  }
+}   
+
+@media (min-width: 1063px) {
+  .ShuffleButton {
+      font-size: 3rem;
+  }
+
+  .ButtonDiv {
+    margin-top: 700px;
+  }
+}   
+
+@media (min-width: 1140px) {
+  .ShuffleButton {
+      font-size: 3rem;
+  }
+
+  .ButtonDiv {
+    margin-top: 750px;
+  }
+}   
+
+
+/* @media (min-width: 1200px) {
+
+  .ButtonDiv {
+    margin-top: 58%;
+  }
+
+  .ShuffleButton {
+      font-size: 3rem;
+  }
+}   */
+
+/* @media (min-width: 1300px) {
+
+  .ButtonDiv {
+    margin-top: 48%;
+  }
+
+  .ShuffleButton {
+      font-size: 3rem;
+  }
+}    */

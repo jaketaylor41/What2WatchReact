@@ -1,0 +1,12 @@
+
+.Title {
+    margin-left: 5px;
+    font-size: 1.5rem;
+}
+
+@media (min-width: 500px) {
+    .Title {
+        margin-left: 5px;
+        font-size: 2.5rem;
+    }
+}

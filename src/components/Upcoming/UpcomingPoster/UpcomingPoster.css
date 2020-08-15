@@ -1,0 +1,48 @@
+/* Mobile */
+.Poster {
+    height: 215px;
+    width: auto;
+    box-shadow: 0 8px 17px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
+    border-radius: 10px;
+}
+
+.PosterInfo {
+    text-align: center;
+    display: inline-block;
+}
+
+.Title {
+    font-size: 20px;
+}
+
+.Date {
+    font-size: 15px;
+}
+
+
+
+/* Desktop */
+@media (min-width: 500px) {
+
+    .Poster {
+        height: auto;
+        width: 100%;
+        box-shadow: 0 8px 17px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
+        border-radius: 10px;
+    }
+    
+    .PosterInfo {
+        text-align: center;
+    }
+
+    .Title {
+        font-size: 25px;
+    }
+    
+    .Date {
+        font-size: 20px;
+    }
+
+}
+
+
