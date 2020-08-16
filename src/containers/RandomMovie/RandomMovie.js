@@ -19,8 +19,8 @@ class RandomMovie extends Component {
         randomMovie: null,
         viewModal: false,
         loading: false,
-        //addToWatchList: false,
-        //alreadyAdded: false
+        addToWatchList: false,
+        alreadyAdded: false
     }
 
     componentDidMount () {
@@ -76,23 +76,18 @@ class RandomMovie extends Component {
     }
 
 
-    addToWatchListHandler = (event) => {
-        event.preventDefault();
+    addToWatchListHandler = () => {
 
-    
         this.setState({addToWatchList: true});
         this.setState({alreadyAdded: true});
 
         const watchData = {
-            id: this.state.randomMovie.id,
             title: this.state.randomMovie.original_title,
             poster: this.state.randomMovie.poster_path,
             userId: this.props.userId
         }
 
         this.props.onAddItem(watchData, this.props.token);
-        
-
 
         // const watch = {
         //         id: this.state.randomMovie.id,
@@ -122,8 +117,7 @@ class RandomMovie extends Component {
 
         if (this.state.randomMovie) {
             movie = (
-                <div className={classes.MovieContainer} 
-                style={{filter: this.state.viewModal ? 'blur(5px)' : 'none'}}>
+                <div className={!this.state.loading && classes.Load}>
                     <Poster
                         poster={this.state.randomMovie.poster_path}
                         backdrop={this.state.randomMovie.backdrop_path}
@@ -139,7 +133,11 @@ class RandomMovie extends Component {
         }
 
         if (this.state.loading) {
-            movie = <Spinner />
+            movie = (
+                <div style={{marginTop: '50%'}}>
+                    <Spinner />
+                </div>
+            );
         }
 
         return (
@@ -149,10 +147,13 @@ class RandomMovie extends Component {
                         {overview}
                     </Modal>
                     
-                    <Aux>
-                        {movie}
-
-                    </Aux>
+                    <div className={classes.MovieContainer} style={{filter: this.state.viewModal ? 'blur(5px)' : 'none'}}> 
+                        <div>
+                            <div className={classes.ImageWrapper}>
+                                {movie}
+                            </div>
+                        </div>
+                    </div>
 
 
                 </div>
@@ -161,7 +162,7 @@ class RandomMovie extends Component {
                 toggleMovie={this.toggleMovieHandler}
                 addToList={this.addToWatchListHandler}
                 disabled={disabledInfo}
-                add={this.state.addToWatchList} />
+                added={this.state.addToWatchList} />
 
 
             </Aux>
@@ -175,15 +176,13 @@ const mapStateToProps = state => {
     return {
         token: state.auth.token,
         userId: state.auth.userId
-        
-
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAddItem: (watchData, token) => dispatch(actions.addWatchItem(watchData, token))
+        onAddItem: (watchData, token, userId) => dispatch(actions.addWatchItem(watchData, token))
     };
 };
 
-export default connect(mapDispatchToProps, mapStateToProps)(withErrorHandler(RandomMovie, axios));
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(RandomMovie, axios));

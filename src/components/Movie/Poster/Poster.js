@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import classes from './Poster.css';
+import Aux from '../../../hoc/Aux/Aux';
 
 
 class Poster extends Component {
@@ -20,8 +21,7 @@ class Poster extends Component {
 
 
         return (
-            <div>
-                <div className={classes.ImageWrapper}>
+            <Aux>
                     <img src={'https://image.tmdb.org/t/p/original/' + this.props.backdrop}
                         className={classes.Backdrop}
                         alt="missing poster"
@@ -39,8 +39,7 @@ class Poster extends Component {
                                 />
                         </div>
                     </div>
-                </div>
-            </div>
+            </Aux>
                 
             );
         }

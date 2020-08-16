@@ -10,14 +10,12 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import authReducer from './store/reducers/auth';
-import watchItemReducer from './store/reducers/watchItem';
 import watchListReducer from './store/reducers/watchList';
 
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
-    watchItem: watchItemReducer,
     watchList: watchListReducer,
     auth: authReducer
 });

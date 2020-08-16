@@ -8,6 +8,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from 'react-slick';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import classes from './Home.css'
 
 class Home extends Component {
 
@@ -54,19 +55,19 @@ class Home extends Component {
     render () {
 
 
-        let showing = <Spinner />
-        let upcoming = <Spinner />
+        let showing = null;
+        let upcoming = null;
 
         if (this.state.nowShowing) {
             showing = this.state.nowShowing.map((photo) => {
                 return (
-                    <InTheatrePoster
-                    key={photo.id}
-                    poster_path={photo.poster_path}
-                    original_title={photo.original_title}
-                    release_date={photo.release_date}
-                    imdbId={photo.id}
-                     />
+                        <InTheatrePoster
+                        key={photo.id}
+                        poster_path={photo.poster_path}
+                        original_title={photo.original_title}
+                        release_date={photo.release_date}
+                        imdbId={photo.id}
+                         />
                  );
             })
         }
@@ -135,6 +136,7 @@ class Home extends Component {
             <div style={homeDiv}>
                 <section>
                     <InTheatresTitle />
+                    
                     <Slider {...settings}>
                         {showing}
                     </Slider>

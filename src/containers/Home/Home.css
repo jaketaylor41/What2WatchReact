@@ -1,0 +1,25 @@
+.Load {
+height: auto;
+width: 100%;
+background-color: rgba(0, 0, 0, 1);
+height: 200px;
+animation: sharpen 0.8s both;
+position: relative;
+padding-right: 15px;
+padding-left: 15px;
+flex-basis: 0;
+flex-grow: 1;
+min-width: 0;
+max-width: 100%;
+
+
+}
+
+@keyframes sharpen {
+from {
+    filter: blur(50px);
+}
+to {
+    filter: blur(none);
+}
+}

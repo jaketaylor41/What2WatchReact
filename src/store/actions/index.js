@@ -2,9 +2,6 @@ export {
     auth
 } from './auth';
 export {
-    fetchWatchList
+    fetchWatchList,
+    addWatchItem
 } from './watchList';
-export {
-    addWatchItem,
-    removeWatchItem
-} from './watchItem';

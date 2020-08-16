@@ -68,7 +68,6 @@ class WatchList extends Component {
             watchItem = this.props.watchList.map((item) => (
                 <Col key={item.id}>
                     <Item
-                        id={item.id}
                         title={item.title}
                         poster={item.poster}
                         removeItem={() => this.removeFromListHandler(item.itemKey)} 
