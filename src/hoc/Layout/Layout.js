@@ -3,6 +3,7 @@ import Aux from '../Aux/Aux';
 import classes from './Layout.css';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
 import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
+import { connect } from 'react-redux';
 
 /* Main allows me to use this layout component as a wrapper around the core content
     component I want to render to the screen */
@@ -33,8 +34,12 @@ class Layout extends Component {
     render () {
         return (
         <Aux>
-            <Toolbar hamburgerIconClicked={this.sideDrawerToggleHandler} />
-            <SideDrawer open={this.state.showSideDrawer} closed={this.sideDrawerClosedHandler} />
+            <Toolbar
+                isAuth={this.props.isAuthenticated} 
+                hamburgerIconClicked={this.sideDrawerToggleHandler} />
+            <SideDrawer
+                isAuth={this.props.isAuthenticated} 
+                open={this.state.showSideDrawer} closed={this.sideDrawerClosedHandler} />
             <main className={classes.Content}>
                 {this.props.children}
             </main>
@@ -44,5 +49,10 @@ class Layout extends Component {
 
 } 
 
+const mapStateToProps = state => {
+    return {
+        isAuthenticated: state.auth.token !== null
+    }
+}
 
-export default Layout;
+export default connect(mapStateToProps)(Layout);

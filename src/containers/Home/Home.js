@@ -1,56 +1,60 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import InTheatrePoster from '../../components/InTheatres/InTheatresPoster/InTheatresPoster';
-import InTheatresTitle from '../../components/InTheatres/InTheatresTitle/InTheatresTitle';
-import UpcomingTitle from '../../components/Upcoming/UpcomingTitle/UpcomingTitle';
 import UpcomingPoster from '../../components/Upcoming/UpcomingPoster/UpcomingPoster';
-import "slick-carousel/slick/slick.css"; 
-import "slick-carousel/slick/slick-theme.css";
-import Slider from 'react-slick';
-import Spinner from '../../components/UI/Spinner/Spinner';
-import classes from './Home.css'
+import Modal from '../../components/UI/Modal/Modal';
+import {Container} from 'react-bootstrap';
+import classes from './Home.css';
+import HomeHero from '../../components/UI/HomeHero/HomeHero';
+import moment from 'moment';
+import Trailer from '../../components/UI/HomeHero/Trailer/Trailer';
 
 class Home extends Component {
 
     state = {
        nowShowing: null,
        upcoming: null,
-       isMounted: false
+       homePicture: null,
+       homeTitle: null,
+       trailerKey: null,
+       viewModal: false
     }
 
     componentDidMount () {
         this.fetchData();
-        this.setState({isMounted: true})
     }
 
     fetchData = () => {
+
         axios.all([
             axios.get('https://api.themoviedb.org/3/movie/now_playing?region=US&page=1&language=en-US&api_key=b2b33767c6b429003530678acd077911'),
             axios.get('https://api.themoviedb.org/3/movie/upcoming?region=US&page=1&language=en-US&api_key=b2b33767c6b429003530678acd077911')
         ])
             .then(response => {
                 const nowPlayingData = response[0].data.results.slice(0, 10);
-                this.setState({nowShowing: nowPlayingData});
-                console.log(response[0]);
                 const upcomingData = response[1].data.results.slice(0, 10);
+                const homePic = response[1].data.results[1].backdrop_path;
+                const homeTitle = response[1].data.results[1].original_title;
+                this.setState({nowShowing: nowPlayingData});
                 this.setState({upcoming: upcomingData});
+                this.setState({homePicture: homePic});
+                this.setState({homeTitle: homeTitle});
+                console.log(response[0]);
                 console.log(response[1]);
             })
             .catch(error => console.log(error));
     }
 
-        componentDidUpdate () {
-            if (!this.state.isMounted) {
-                this.fetchData();
-            }
-        }
+    showModalHandler = () => {
+        this.setState({viewModal: true});
+    }
 
-        componentWillUnmount () {
-            console.log("LEAVING HOME PAGE");
-            this.setState({isMounted: false});
-        }
 
-    
+
+    closeModalHandler = () => {
+        this.setState({viewModal: false});
+    }
+
     
     render () {
 
@@ -65,8 +69,7 @@ class Home extends Component {
                         key={photo.id}
                         poster_path={photo.poster_path}
                         original_title={photo.original_title}
-                        release_date={photo.release_date}
-                        imdbId={photo.id}
+                        release_date={moment(photo.release_date).format('MM/DD/YYYY')}
                          />
                  );
             })
@@ -79,79 +82,44 @@ class Home extends Component {
                     key={photo.id}
                     poster_path={photo.poster_path}
                     original_title={photo.original_title}
-                    release_date={photo.release_date}
+                    release_date={moment(photo.release_date).format('MM/DD/YYYY')}
                      />
                  );
             })
         }
 
-
-        const settings = {
-            dots: false,
-            fade: false,
-            infinite: true,
-            speed: 500,
-            slidesToShow: 4,
-            arrows: true,
-            swipeToSlide: true,
-            className: "slides",
-            autoplay: false,
-            responsive: [
-                {
-                    breakpoint: 1024,
-                    settings: {
-                        dots: false,
-                        fade: false,
-                        infinite: true,
-                        speed: 500,
-                        slidesToShow: 3,
-                        arrows: true,
-                        swipeToSlide: true,
-                        className: "slides",
-                        autoplay: false,
-                    }
-                },
-                {
-                    breakpoint: 600,
-                    settings: {
-                        dots: false,
-                        fade: false,
-                        infinite: true,
-                        speed: 500,
-                        slidesToShow: 2,
-                        arrows: true,
-                        swipeToSlide: true,
-                        className: "slides",
-                        autoplay: false,
-                    }
-                }
-            ]
-        };
-
         let homeDiv = {
             overflow: 'hidden'
         }
 
+
+
         return (
             <div style={homeDiv}>
-                <section>
-                    <InTheatresTitle />
-                    
-                    <Slider {...settings}>
+                <Modal show={this.state.viewModal} modalClosed={this.closeModalHandler}>
+                    <Trailer/>
+                </Modal>
+                <section className={classes.SectionOne}>
+                    <HomeHero trailerPhoto={this.state.homePicture} trailerTitle={this.state.homeTitle} clicked={this.showModalHandler}/>
+                </section>
+                <section className={classes.SectionTwo}>
+                    <h2 className={classes.SectionTwoTitle}>Now Showing</h2>
+                    <Container fluid className={classes.Container}>
+                    <div className={classes.Row}>
                         {showing}
-                    </Slider>
+                    </div>
+                </Container>
                 </section>
 
-                <section>
-                <UpcomingTitle />
-                    <Slider {...settings}>
+                <section className={classes.SectionThree}>
+                <h2 className={classes.SectionThreeTitle}>Upcoming</h2>
+                <Container fluid className={classes.Container}>
+                    <div className={classes.Row}>
                         {upcoming}
-                    </Slider>
+                    </div>
+                </Container>
                 </section>
             </div>
-
-
-
 
         );
     }

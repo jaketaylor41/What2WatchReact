@@ -1,0 +1,98 @@
+
+/* Mobile */
+@media (min-width: 320px) {
+    .MovieContainer {
+        position: relative;
+        height: 240px;
+        margin-top: 150px;
+    }
+}
+
+/* Mobile */
+@media (min-width: 360px) {
+    .MovieContainer {
+        position: relative;
+        height: 280px;
+        margin-top: 180px;
+    }
+}
+
+/* Mobile */
+@media (width: 375px) and (height: 812px) {
+    .MovieContainer {
+        position: relative;
+        height: 350px;
+        margin-top: 200px;
+    }
+}
+
+/* Mobile */
+@media (width: 411px) and (height: 823px) {
+    .MovieContainer {
+        position: relative;
+        height: 350px;
+        margin-top: 200px;
+    }
+}
+
+
+/* Mobile */
+@media (min-width: 411px) {
+    .MovieContainer {
+        position: relative;
+        height: 300px;
+    }
+}
+
+/* Mobile */
+@media (min-width: 414px) {
+    .MovieContainer {
+        position: relative;
+        height: 350px;
+    }
+}
+
+/*   Desktop  */
+@media (min-width: 500px) {
+    .MovieContainer {
+        position: relative;
+        height: 100%;
+        margin-top: 120px;
+    }
+
+    .ImageWrapper {
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        left: 0;
+        right: 0;
+        align-items: 100%;
+        width: 95%;
+        margin: 0 auto;
+        height: center;
+        max-width: 1200px;
+    }
+
+    .Load {
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        left: 0;
+        right: 0;
+        align-items: 100%;
+        width: 95%;
+        margin: 0 auto;
+        height: center;
+        max-width: 1200px;
+        animation: sharpen 0.8s both;
+    }
+}
+
+@keyframes sharpen {
+    from {
+        filter: blur(50px);
+    }
+    to {
+        filter: blur(none);
+    }
+}

@@ -1,5 +1,8 @@
 export {
-    auth
+    auth,
+    logout,
+    setAuthRedirectPath,
+    authCheckState
 } from './auth';
 export {
     fetchWatchList,

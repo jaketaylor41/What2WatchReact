@@ -1,36 +1,28 @@
 import React from 'react';
 import classes from './InTheatresPoster.css';
-import { Card, Col } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
-
-let cardStyle = {
-    border: 0,
-    padding: '10px'
-}
-
-let cardBodyStyle = {
-
-    textAlign: 'center'
-}
 
 const inTheatrePoster = (props) =>  (
 
-    <React.Fragment>
-        <Col>
-            <Card style={cardStyle}>
-                <Card.Img
-                variant="top"
-                src={'https://image.tmdb.org/t/p/w500/' + props.poster_path}
+    <Card className={classes.Card}>
+    <div className={classes.PosterContainer}>
+        <div className={classes.Wrapper}>
+            <img
+                src={'https://image.tmdb.org/t/p/w220_and_h330_face/' + props.poster_path}
+                alt="missing"
                 className={classes.Poster} 
-                />
-                <Card.Body style={cardBodyStyle}>
-                    <div className={classes.PosterInfo}>
-                        <h1 className={classes.Title}>{props.original_title}</h1>
-                    </div>
-                </Card.Body>
-            </Card>
-        </Col>
-    </React.Fragment>
+            /> 
+            <div className={classes.Overlay}></div>
+        </div>
+    </div>
+    <Card.Body className={classes.CardBody}>
+        <div className={classes.PosterInfo}>
+            <h2 className={classes.Title}>{props.original_title}</h2>
+            <p className={classes.Date}>{props.release_date}</p>
+        </div>
+    </Card.Body>
+</Card>
 
 
 

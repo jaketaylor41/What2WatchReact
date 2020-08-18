@@ -23,3 +23,50 @@ to {
     filter: blur(none);
 }
 }
+
+.Container {
+    width: auto;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: flex-start;
+    padding-left: 35px;
+}
+
+.Row {
+    width: 100%;
+    max-width: 1500px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    transition: height .5s linear;
+    white-space: nowrap;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 20px 0 20px 0;
+}
+
+
+
+.SectionTwo {
+    margin: 20px 0 20px 0;
+    background-color: #F5F5F5;
+}
+
+.SectionTwoTitle {
+    font-weight: 600;
+    margin-left: 55px;
+    padding-top: 10px;
+}
+
+.SectionThreeTitle {
+    font-weight: 600;
+    margin-left: 55px;
+    padding-top: 10px;
+}
+
+.SectionThree {
+    margin: 20px 0 20px 0;
+    background-color: #F5F5F5;
+}
