@@ -1,13 +1,11 @@
 import React from 'react';
-import w2wIcon from '../../assets/images/What2Watch.png';
+import w2wIcon from '../../assets/images/w2wIcon.png';
 import classes from './Logo.css';
 
-const logo = (props) => (
+const sideLogo = (props) => (
 
     <div className={classes.Logo} style={{width: '100px'}}>
-        <a href="/">
         <img src={w2wIcon} alt="W2W" />
-        </a>
     </div>
 
 
@@ -15,4 +13,4 @@ const logo = (props) => (
 
 
 
-export default logo;
+export default sideLogo;

@@ -5,7 +5,7 @@ import MovieControl from '../../components/Movie/MovieControl/MovieControl';
 import Modal from '../../components/UI/Modal/Modal';
 import MovieOverview from '../../components/Movie/MovieOverview/MovieOverview';
 import Spinner from '../../components/UI/Spinner/Spinner';
-import classes from './RandomMovie.css';
+import classes from './RandomShow.css';
 import Aux from '../../hoc/Aux/Aux';
 
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
@@ -16,7 +16,7 @@ class RandomTVshow extends Component {
 
     state = {
         randomPage: Math.floor(Math.random() * 57),
-        randomMovie: null,
+        randomShow: null,
         viewModal: false,
         loading: false,
         addToWatchList: false,
@@ -33,17 +33,24 @@ class RandomTVshow extends Component {
         axios.get(`https://api.themoviedb.org/3/tv/top_rated?api_key=b2b33767c6b429003530678acd077911&language=en-US&page=${this.state.randomPage}`)
         .then(response => {
             
-            const allMovies = response.data.results;
-            const randomIndex = Math.floor(Math.random() * response.data.results.length);
-            const randomMovie = response.data.results[randomIndex];
-
-            this.setState({randomMovie: randomMovie});
+            const allShows = response.data.results;
+            let filteredShows = [];
+            for (let i = 0; i < allShows.length; i++) {
+                if (allShows[i].poster_path != null && allShows[i].backdrop_path != null) {
+                    filteredShows.push(allShows[i]);
+                }
+            }
+            console.log(filteredShows)
+            const randomIndex = Math.floor(Math.random() * filteredShows.length);
+            const randomShow = filteredShows[randomIndex];
+            
+            this.setState({randomShow: randomShow});
             this.setState({randomPage: Math.floor(Math.random() * 57) + 1});
             this.setState({alreadyAdded: false});
-
+            
+            console.log(allShows);
             console.log(this.state.randomPage);
-            console.log(allMovies);
-            console.log(this.state.randomMovie);
+            console.log(this.state.randomShow);
 
         })
         .catch(error => {
@@ -82,31 +89,19 @@ class RandomTVshow extends Component {
         this.setState({alreadyAdded: true});
 
         const watchData = {
-            title: this.state.randomMovie.original_title,
-            poster: this.state.randomMovie.poster_path,
+            title: this.state.randomShow.original_title,
+            poster: this.state.randomShow.poster_path,
             userId: this.props.userId
         }
 
         this.props.onAddItem(watchData, this.props.token);
 
-        // const watch = {
-        //         id: this.state.randomMovie.id,
-        //         title: this.state.randomMovie.original_title,
-        //         poster: this.state.randomMovie.poster_path
-        // }
-        
-        //     axios.post('https://what2watch-cf980.firebaseio.com/watch.json', watch)
-        //         .then( response => {
-        //             console.log(response);
-        //             this.setState({alreadyAdded: true});
-        //         })
-        //         .catch(error => console.log(error));
     }
 
     
     render () {
         
-        let movie = null;
+        let show = null;
         let overview = null;
 
         let disabledInfo = false;
@@ -115,25 +110,25 @@ class RandomTVshow extends Component {
             disabledInfo = true;
         }
 
-        if (this.state.randomMovie) {
-            movie = (
+        if (this.state.randomShow) {
+            show = (
                 <div className={!this.state.loading && classes.Load}>
                     <Poster
-                        poster={this.state.randomMovie.poster_path}
-                        backdrop={this.state.randomMovie.backdrop_path}
+                        poster={this.state.randomShow.poster_path}
+                        backdrop={this.state.randomShow.backdrop_path}
                         clicked={this.showModalHandler}
                         loading={this.state.loading}
                     />                        
                 </div>
     
             );
-            overview = <MovieOverview title={this.state.randomMovie.original_title}
-                            date={this.state.randomMovie.first_air_date}
-                            overview={this.state.randomMovie.overview}/>
+            overview = <MovieOverview title={this.state.randomShow.name}
+                            date={this.state.randomShow.first_air_date}
+                            overview={this.state.randomShow.overview}/>
         }
 
         if (this.state.loading) {
-            movie = (
+            show = (
                 <div style={{marginTop: '50%'}}>
                     <Spinner />
                 </div>
@@ -150,7 +145,7 @@ class RandomTVshow extends Component {
                     <div className={classes.MovieContainer} style={{filter: this.state.viewModal ? 'blur(5px)' : 'none'}}> 
                         <div>
                             <div className={classes.ImageWrapper}>
-                                {movie}
+                                {show}
                             </div>
                         </div>
                     </div>

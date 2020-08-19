@@ -36,7 +36,7 @@ class HomeHero extends Component {
         return (
             <Container fluid>
                 <Row>
-                    <Col style={{paddingRight: '0'}, {maxWidth: '53.333333%'}} md={7}>
+                    <Col style={{paddingRight: '0', maxWidth: '53.333333%'}} md={7}>
                         <div className={classes.HomeHero} onClick={this.props.clicked}>
                             <div className={classes.BackdropContainer}>
                                 <div className={classes.Wrapper}>
@@ -71,7 +71,7 @@ class HomeHero extends Component {
                                                 <div className={classes.InfoContainer}>
                                                     <h2 className={classes.ShowInfo}>{show.original_name}</h2>
                                                     <p className={classes.Overview}>Aired: {moment(show.first_air_date).format('MM/DD/YYYY')}</p>
-                                                    <p className={classes.Overview}>{show.popularity.toFixed(0)}%</p>
+                                                    <p className={classes.Overview}><i style={{color: '#F5C518', paddingRight: '5px'}} className="fa fa-star"></i>{show.vote_average}/10</p>
                                                 </div>
                                                 <div className={classes.Slot}> 
                                                     <div className={classes.PosterContainer}>

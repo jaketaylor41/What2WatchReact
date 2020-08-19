@@ -87,6 +87,27 @@
     box-sizing: border-box;
 }
 
+.ImdbLink {
+    text-decoration: none !important;
+    color: inherit;
+}
+.ImdbLink:hover {
+    color: inherit;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* Desktop */
 @media (min-width: 500px) {
@@ -129,6 +150,29 @@
         right: 0;
         width: 100%;
         border: 0;
+    }
+
+    .PosterInfo i {
+        color: #F5C518;
+        padding-right: 5px;
+    }
+
+
+
+    .Rating {
+        font-size: 15px;
+        font-weight: 600;
+    }
+
+    .PosterInfo span {
+        font-size: 12px;
+        font-weight: 400;
+    }
+
+    .Votes {
+        font-size: 12px;
+        font-weight: 400;
+        margin-left: 20px;
     }
     
     .Overlay {

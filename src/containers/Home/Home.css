@@ -70,3 +70,20 @@ to {
     margin: 20px 0 20px 0;
     background-color: #F5F5F5;
 }
+
+.HomeModal {
+    transform: translateY(0px);
+    opacity: 1;
+    visibility: visible;
+    width: 650px;
+    left: calc(50% - 320px);
+    top: 30%;
+    position: fixed;
+    z-index: 500;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15);
+    padding: 16px;
+    transition: all 0.3s;
+    box-sizing: border-box;
+}
