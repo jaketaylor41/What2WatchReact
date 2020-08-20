@@ -3,10 +3,11 @@ import axios from 'axios';
 import Poster from '../../components/Movie/Poster/Poster';
 import MovieControl from '../../components/Movie/MovieControl/MovieControl';
 import Modal from '../../components/UI/Modal/Modal';
-import MovieOverview from '../../components/Movie/MovieOverview/MovieOverview';
+import Overview from '../../components/Movie/Overview/Overview';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import classes from './RandomMovie.css';
 import Aux from '../../hoc/Aux/Aux';
+import moment from 'moment';
 
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import * as actions from '../../store/actions/index';
@@ -34,8 +35,16 @@ class RandomMovie extends Component {
         .then(response => {
             
             const allMovies = response.data.results;
-            const randomIndex = Math.floor(Math.random() * response.data.results.length);
-            const randomMovie = response.data.results[randomIndex];
+            let filteredMovies = [];
+
+            for (let i = 0; i < allMovies.length; i++) {
+                if (allMovies[i].poster_path != null && allMovies[i].backdrop_path != null) {
+                    filteredMovies.push(allMovies[i]);
+                }
+            }
+            
+            const randomIndex = Math.floor(Math.random() * filteredMovies.length);
+            const randomMovie = filteredMovies[randomIndex];
 
             this.setState({randomMovie: randomMovie});
             this.setState({randomPage: Math.floor(Math.random() * 300) + 1});
@@ -43,6 +52,7 @@ class RandomMovie extends Component {
 
             console.log(this.state.randomPage);
             console.log(allMovies);
+            console.log(filteredMovies);
             console.log(this.state.randomMovie);
 
         })
@@ -89,18 +99,6 @@ class RandomMovie extends Component {
 
         this.props.onAddItem(watchData, this.props.token);
 
-        // const watch = {
-        //         id: this.state.randomMovie.id,
-        //         title: this.state.randomMovie.original_title,
-        //         poster: this.state.randomMovie.poster_path
-        // }
-        
-        //     axios.post('https://what2watch-cf980.firebaseio.com/watch.json', watch)
-        //         .then( response => {
-        //             console.log(response);
-        //             this.setState({alreadyAdded: true});
-        //         })
-        //         .catch(error => console.log(error));
     }
 
     
@@ -127,8 +125,11 @@ class RandomMovie extends Component {
                 </div>
     
             );
-            overview = <MovieOverview title={this.state.randomMovie.original_title}
-                            date={this.state.randomMovie.release_date}
+            overview = <Overview
+                            title={this.state.randomMovie.title}
+                            rating={this.state.randomMovie.vote_average}
+                            numVotes={this.state.randomMovie.vote_count}
+                            date={moment(this.state.randomMovie.release_date).format('MMMM Do, YYYY')}
                             overview={this.state.randomMovie.overview}/>
         }
 

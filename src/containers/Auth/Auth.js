@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import Input from '../../components/UI/Input/Input';
-import classes from './Auth.css';
-import Spinner from '../../components/UI/Spinner/Spinner';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/auth';
+import classes from './Auth.css';
+import LoginForm from '../../components/UI/AuthForms/LoginForm/LoginForm';
+import RegForm from '../../components/UI/AuthForms/RegForm/RegForm';
 
 
 class Auth extends Component {
@@ -14,6 +15,7 @@ class Auth extends Component {
             email: {
                 elementType: 'input',
                 elementConfig: {
+                    label: 'Email',
                     type: 'email',
                     placeholder: 'Email'
                 },
@@ -28,6 +30,7 @@ class Auth extends Component {
             password: {
                 elementType: 'input',
                 elementConfig: {
+                    label: 'Password',
                     type: 'password',
                     placeholder: 'Password'
                 },
@@ -38,9 +41,10 @@ class Auth extends Component {
                 },
                 valid: false,
                 touched: false
-            }   
+            },   
         },
-        isSignup: true
+        isSignup: false
+        
     }
 
 
@@ -50,27 +54,27 @@ class Auth extends Component {
             return true;
         }
 
-        if (rules.required) {
-            isValid = value.trim() !== '' && isValid;
-        }
+        // if (rules.required) {
+        //     isValid = value.trim() !== '' && isValid;
+        // }
 
         if (rules.minLength) {
             isValid = value.length >= rules.minLength && isValid;
         }
 
-        if (rules.maxLength) {
-            isValid = value.length <= rules.maxLength && isValid
-        }
+        // if (rules.maxLength) {
+        //     isValid = value.length <= rules.maxLength && isValid
+        // }
 
         if ( rules.isEmail ) {
             const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
             isValid = pattern.test( value ) && isValid
         }
 
-        if ( rules.isNumeric ) {
-            const pattern = /^\d+$/;
-            isValid = pattern.test( value ) && isValid
-        }
+        // if ( rules.isNumeric ) {
+        //     const pattern = /^\d+$/;
+        //     isValid = pattern.test( value ) && isValid
+        // }
 
         return isValid;
     }
@@ -85,12 +89,16 @@ class Auth extends Component {
                 touched: true
             }
         };
-        this.setState( { controls: updatedControls } );
+        this.setState({controls: updatedControls});
     }
 
     submitHandler = ( event ) => {
         event.preventDefault();
-        this.props.onAuth( this.state.controls.email.value, this.state.controls.password.value, this.state.isSignup );
+        if (this.state.controls.valid === true && this.state.controls.valid === true) {
+            this.props.onAuth( this.state.controls.email.value, this.state.controls.password.value, this.state.isSignup );
+        } else {
+            alert("Invalid Inputs")
+        }
     }
 
     switchAuthModeHandler = () => {
@@ -107,10 +115,11 @@ class Auth extends Component {
                 config: this.state.controls[key]
             } );
         }
-
+        console.log(this.checkValidity())
         let form = formElementsArray.map( formElement => (
             <Input
                 key={formElement.id}
+                label={formElement.config.elementConfig.placeholder}
                 elementType={formElement.config.elementType}
                 elementConfig={formElement.config.elementConfig}
                 value={formElement.config.value}
@@ -121,9 +130,6 @@ class Auth extends Component {
             />
         ));
 
-        if (this.props.loading) {
-            form = <Spinner />
-        }
 
         let errorMessage = null;
 
@@ -141,19 +147,34 @@ class Auth extends Component {
 
         return (
 
-            <div className={classes.Auth}>
+            <div>
+                {!this.state.isSignup ? 
+                <LoginForm submit={this.submitHandler} register={this.switchAuthModeHandler}>
                 {authRedirect}
                 {errorMessage}
-                <form onSubmit={this.submitHandler}>
-                    {form}
-                    <button>Sign In</button>
-                </form>
-
-                <button onClick={this.switchAuthModeHandler}>
-                    SWITCH TO {this.state.isSignup ? 'SIGNIN' : 'SIGNUP'}
-                </button>
-
+                {form}
+                </LoginForm>
+                :
+                <RegForm submit={this.submitHandler} login={this.switchAuthModeHandler}>
+                {authRedirect}
+                {errorMessage}
+                {form}
+                </RegForm>}
             </div>
+
+            // <div className={classes.Auth}>
+            //     {authRedirect}
+            //     {errorMessage}
+            //     <form onSubmit={this.submitHandler}>
+            //         {form}
+            //         <button>Sign In</button>
+            //     </form>
+
+            //     <button onClick={this.switchAuthModeHandler}>
+            //         SWITCH TO {this.state.isSignup ? 'SIGNIN' : 'SIGNUP'}
+            //     </button>
+
+            // </div>
 
 
         );

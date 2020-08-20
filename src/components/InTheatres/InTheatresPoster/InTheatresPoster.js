@@ -34,9 +34,21 @@ const inTheatrePoster = (props) =>  {
             </a>
             <Card.Body className={classes.CardBody}>
                 <div className={classes.PosterInfo}>
-                    <h2 className={classes.Title}>{props.original_title}</h2>
-                    <div className={classes.Ratings}>
-                        <p className={classes.Rating}><i className="fa fa-star"></i>{props.rating}<span>/10</span> <p className={classes.Votes}>{props.numVotes} votes</p></p>
+                    <h3 className={classes.Title}>{props.original_title}</h3>
+                    <div className={classes.RatingWrapper}>
+                        <i className="fa fa-star"></i>
+                        <div className={classes.Rating}>
+                            <div className={classes.RatingValue}>
+                                <strong>
+                                    <span>{props.rating}</span>
+                                </strong>
+                                <span className={classes.Grey}>/</span>
+                                <span className={classes.Grey}>10</span>
+                            </div>
+                            <div>
+                                <span className={classes.Grey}>{props.numVotes} votes</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </Card.Body>

@@ -25,7 +25,7 @@ class MovieControl extends Component {
                             onClick={this.props.addToList}
                             disabled={this.props.disabled}>
                             <i
-                            style={this.props.added && this.props.disabled ? {color: '#008000'} : {color: '#343d52'}}
+                            style={this.props.added && this.props.disabled ? {color: '#008000'} : null}
                             className={this.props.added && this.props.disabled ? 'fa fa-check' : 'fa fa-list' }
                             ><span>{this.props.added && this.props.disabled ? 'Saved' : 'Save'}</span></i>
                         </button>

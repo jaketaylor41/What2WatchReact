@@ -3,7 +3,7 @@ import axios from 'axios';
 import Poster from '../../components/Movie/Poster/Poster';
 import MovieControl from '../../components/Movie/MovieControl/MovieControl';
 import Modal from '../../components/UI/Modal/Modal';
-import MovieOverview from '../../components/Movie/MovieOverview/MovieOverview';
+import Overview from '../../components/Movie/Overview/Overview';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import classes from './RandomShow.css';
 import Aux from '../../hoc/Aux/Aux';
@@ -122,7 +122,7 @@ class RandomTVshow extends Component {
                 </div>
     
             );
-            overview = <MovieOverview title={this.state.randomShow.name}
+            overview = <Overview title={this.state.randomShow.name}
                             date={this.state.randomShow.first_air_date}
                             overview={this.state.randomShow.overview}/>
         }

@@ -75,13 +75,12 @@ class Home extends Component {
 
         if (this.state.nowShowing) {
             showing = this.state.nowShowing.map((photo) => {
-                console.log(photo.voter_average)
                 return (
                         <InTheatrePoster
                         key={photo.id}
                         id={photo.id}
                         poster_path={photo.poster_path}
-                        original_title={photo.original_title}
+                        original_title={photo.title}
                         rating={photo.vote_average}
                         numVotes={photo.vote_count}
                          />
@@ -95,8 +94,8 @@ class Home extends Component {
                     <UpcomingPoster
                     key={photo.id}
                     poster_path={photo.poster_path}
-                    original_title={photo.original_title}
-                    release_date={moment(photo.release_date).format('MM/DD/YYYY')}
+                    original_title={photo.title}
+                    release_date={moment(photo.release_date).format('MMM Do, YYYY')}
                     />
                  );
             })

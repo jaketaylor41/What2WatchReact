@@ -15,6 +15,7 @@ class Item extends Component {
 
     render () {
         return (
+            <div>
                 <div className={classes.PosterContainer} onClick={this.props.clicked}>
                     <img
                     className={classes.Poster}
@@ -31,6 +32,7 @@ class Item extends Component {
                         </div>
                     </div>
                 </div>
+            </div>
         );
     }
 

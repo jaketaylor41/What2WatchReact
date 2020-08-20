@@ -7,6 +7,8 @@ import classes from './WatchList.css';
 import * as actions from '../../store/actions/index';
 import { connect } from 'react-redux';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
+import RegForm from '../../components/UI/AuthForms/RegForm/RegForm';
+import Auth from '../Auth/Auth';
 
 class WatchList extends Component {
 
@@ -14,7 +16,7 @@ class WatchList extends Component {
     //     watchList: null
     // }
 
-    componentDidMount () {
+    componentDidMount() {
         this.props.onFetchWatchList(this.props.token, this.props.userId);
     }
     
@@ -57,31 +59,29 @@ class WatchList extends Component {
 
     render () {
 
-        let watchItem = (
-            <div className={classes.SpinnerDiv}>
-                <Spinner />
-            </div>
-        );
 
-        if (!this.props.loading) {
+        let watchItem = null;
+        let auth = <Auth />
 
-            watchItem = this.props.watchList.map((item) => (
-                <Col key={item.id}>
-                    <Item
-                        title={item.title}
-                        poster={item.poster}
-                        removeItem={() => this.removeFromListHandler(item.itemKey)} 
-                    />
-                </Col>
+
+
+        watchItem = this.props.watchList.map((item) => (
+            <Col key={item.id}>
+                <Item
+                    title={item.title}
+                    poster={item.poster}
+                    removeItem={() => this.removeFromListHandler(item.itemKey)} 
+                />
+            </Col>
 
             ));
-        }
 
         return(
 
             <div>
-                <h1>My List</h1>
+                { this.props.isAuthenticated ? 
                 <Container fluid> 
+                <h1>My List</h1>
                     <Row
                     xs={3}
                     md={4}
@@ -90,7 +90,7 @@ class WatchList extends Component {
                     >
                         {watchItem}
                     </Row>
-                </Container>
+                </Container> : auth}
             </div>
 
         );
@@ -102,7 +102,8 @@ const mapStateToProps = state => {
         watchList: state.watchList.watchList,
         loading: state.watchList.loading,
         token: state.auth.token,
-        userId: state.auth.userId
+        userId: state.auth.userId,
+        isAuthenticated: state.auth.token != null
     };
 };
 

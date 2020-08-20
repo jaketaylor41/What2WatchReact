@@ -16,13 +16,15 @@
   width: 100%;
   margin: 0 auto;
   margin-top: 850px;
+  background-color: #F5F5F5;
+  padding: 20px;
 } 
 
 .ShuffleButton {
   font-weight: 400;
   color: #fff;
   user-select: none;
-  background-color: transparent;
+  background-color: #fff;
   border: 1px solid #5d6475;
   padding: 1rem 1.3rem;
   line-height: 1;
@@ -33,7 +35,7 @@
 }
 
 .ShuffleButton:hover {
-  background-color: #F5F5F5;
+  background-color: #fff;
   box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15);
   border-color: #343d52 ;
 }
@@ -60,7 +62,8 @@
 }
 
 .WatchListBtn i:hover {
-  color: #f5f5f5;
+  transition: 0.3s all;
+  color: #008000
 }
 
 .WatchListBtn span {

@@ -70,8 +70,22 @@ class HomeHero extends Component {
                                             <div className={classes.TrendingSlots} key={show.id}>
                                                 <div className={classes.InfoContainer}>
                                                     <h2 className={classes.ShowInfo}>{show.original_name}</h2>
-                                                    <p className={classes.Overview}>Aired: {moment(show.first_air_date).format('MM/DD/YYYY')}</p>
-                                                    <p className={classes.Overview}><i style={{color: '#F5C518', paddingRight: '5px'}} className="fa fa-star"></i>{show.vote_average}/10</p>
+                                                    <p className={classes.Overview}>Aired: {moment(show.first_air_date).format('MMMM Do, YYYY')}</p>
+                                                    <div className={classes.RatingWrapper}>
+                                                        <i className="fa fa-star"></i>
+                                                        <div className={classes.Rating}>
+                                                            <div className={classes.RatingValue}>
+                                                                <strong>
+                                                                    <span>{show.vote_average}</span>
+                                                                </strong>
+                                                                <span className={classes.Grey}>/</span>
+                                                                <span className={classes.Grey}>10</span>
+                                                            </div>
+                                                            <div>
+                                                                <span className={classes.Grey}>{show.vote_count} votes</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div className={classes.Slot}> 
                                                     <div className={classes.PosterContainer}>

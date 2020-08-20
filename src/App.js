@@ -24,6 +24,7 @@ class App extends Component {
       <Switch>
         <Route path="/sign-in" component={Auth} />
         <Route path="/" exact component={Home} />
+        <Route path="/watch-list" component={WatchList} />
         <Route path="/random-movie" component={RandomMovie} />
         <Route path="/random-tv-show" component={RandomTVShow} />
         <Redirect to="/" />

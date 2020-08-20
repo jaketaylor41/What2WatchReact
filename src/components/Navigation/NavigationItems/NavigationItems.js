@@ -6,7 +6,7 @@ const navigationItems = (props) => (
 
     <ul className={classes.NavigationItems}>
         <NavigationItem link="/" exact>Home</NavigationItem>
-        { props.isAuthenticated ? <NavigationItem link="/watch-list">Watch List</NavigationItem> : null }
+        <NavigationItem link="/watch-list">Watch List</NavigationItem>
         <NavigationItem link="/random-movie">Random Movie</NavigationItem>
         <NavigationItem link="/random-tv-show">Random TV Show</NavigationItem>
         { !props.isAuthenticated ? 
