@@ -87,6 +87,15 @@
     box-sizing: border-box;
 }
 
+.ImdbLink {
+    text-decoration: none !important;
+    color: inherit;
+}
+.ImdbLink:hover {
+    color: inherit;
+}
+
+
 
 
 
@@ -180,6 +189,15 @@
         color: rgba(0,0,0,0.6);
         box-sizing: border-box;
     }
+
+    .ImdbLink {
+        text-decoration: none !important;
+        color: inherit;
+    }
+    .ImdbLink:hover {
+        color: inherit;
+    }
+    
 
 }
 

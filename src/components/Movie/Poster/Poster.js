@@ -9,7 +9,7 @@ class Poster extends Component {
         imageLoaded: false
     }
 
-    componentWillUnmount () {
+    componentWillUnmount ()  {
         console.log("Unmounted..");
     }
 
@@ -19,25 +19,39 @@ class Poster extends Component {
 
     render () {
 
+        const sectionBg = {
+            background: `linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url( https://image.tmdb.org/t/p/original/${this.props.backdrop})`,
+            backgroundSize: 'cover',
+            width: '100%',
+            height: 'calc(1000px * .5625)',
+            position: 'relative'
+        }
+
 
         return (
             <Aux>
-                    <img src={'https://image.tmdb.org/t/p/original/' + this.props.backdrop}
+                    {/* <img src={'https://image.tmdb.org/t/p/original/' + this.props.backdrop}
                         className={classes.Backdrop}
                         alt="missing poster"
                         style={{visibility: this.state.imageLoaded ? 'visible' : 'hidden'}}
                         onLoad={this.setImageLoaded}
-                    />
-                    <div className={classes.PosterContainer}>
-                        <div className={classes.OverlayContainer} onClick={this.props.clicked}>
-                            <div className={classes.Overlay}></div>
-                                <img src={'https://image.tmdb.org/t/p/original/' + this.props.poster}
-                                    className={classes.Poster}
-                                    style={{visibility: this.state.imageLoaded ? 'visible' : 'hidden'}}
-                                    alt="missing poster"
-                                    onLoad={this.setImageLoaded}
-                                />
-                        </div>
+                    /> */}
+                    <div className={classes.ShuffleDiv}>
+                        <section style={sectionBg}>
+                            <div className={classes.DivWrapper}>
+                                <div className={classes.PosterContainer} onClick={this.props.clicked}>
+                                    <div className={classes.PosterWrapper}>
+                                        <img src={'https://image.tmdb.org/t/p/original/' + this.props.poster}
+                                            className={classes.Poster}
+                                            style={{visibility: this.state.imageLoaded ? 'visible' : 'hidden'}}
+                                            alt="missing poster"
+                                            onLoad={this.setImageLoaded}
+                                        />
+                                        <div className={classes.Overlay}></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
                     </div>
             </Aux>
                 

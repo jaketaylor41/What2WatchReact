@@ -1,45 +1,32 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Item from '../../components/Watch/Item/Item';
-import Spinner from '../../components/UI/Spinner/Spinner';
 import { Container, Row, Col } from 'react-bootstrap';
 import classes from './WatchList.css';
 import * as actions from '../../store/actions/index';
 import { connect } from 'react-redux';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
-import RegForm from '../../components/UI/AuthForms/RegForm/RegForm';
 import Auth from '../Auth/Auth';
 
 class WatchList extends Component {
 
-    // state = {
-    //     watchList: null
-    // }
+    state = {
+        loggedIn: false
+    }
 
     componentDidMount() {
-        this.props.onFetchWatchList(this.props.token, this.props.userId);
+        console.log("Mounted");
+        if (this.props.isAuthenticated) {
+            this.props.onFetchWatchList(this.props.token, this.props.userId);
+        }
     }
-    
-    // fetchWatchList = () => {
-    //     axios.get('https://what2watch-cf980.firebaseio.com/watch.json')
-    //         .then(response => {
-    
-    //             const items = Object.values(response.data);
-    //             const key = Object.keys(response.data);
-    
-    //             const data = items.map((itemKeys, index) => {
-    //                 return {
-    //                     ...itemKeys,
-    //                     itemKey: key[index]
-    //                 }
-    //             });
-    //             this.setState({watchList: data});
-    //             console.log(this.state.watchList);
-    //         })
-    //         .catch(error => console.log(error));
 
-    // }
-
+    componentDidUpdate (prevState) {
+        if (prevState.isAuthenticated !== this.props.isAuthenticated){
+            console.log("Updated")
+            this.props.onFetchWatchList(this.props.token, this.props.userId);
+        }
+    }
 
     // removeFromListHandler = (itemKey) => {
 
@@ -61,9 +48,13 @@ class WatchList extends Component {
 
 
         let watchItem = null;
-        let auth = <Auth />
+        let auth = (
 
+            <div className={classes.AuthDiv}>
+                <Auth />
+            </div>
 
+        );
 
         watchItem = this.props.watchList.map((item) => (
             <Col key={item.id}>
@@ -78,14 +69,17 @@ class WatchList extends Component {
 
         return(
 
-            <div>
-                { this.props.isAuthenticated ? 
-                <Container fluid> 
-                <h1>My List</h1>
-                    <Row
-                    xs={3}
+            <div className={classes.WatchListDiv}>
+                {this.props.isAuthenticated ?
+                <Container fluid>
+                    <div className={classes.Title}>
+                        <h1 className={classes.MyList}>My List</h1>
+                        <hr />
+                    </div>
+                    <Row className={classes.Row}
+                    xs={2}
                     md={4}
-                    lg={6}
+                    lg={5}
                     xl={7}
                     >
                         {watchItem}
@@ -103,6 +97,7 @@ const mapStateToProps = state => {
         loading: state.watchList.loading,
         token: state.auth.token,
         userId: state.auth.userId,
+        authRedirectPath: state.auth.authRedirectPath,
         isAuthenticated: state.auth.token != null
     };
 };

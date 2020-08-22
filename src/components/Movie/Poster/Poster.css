@@ -1,25 +1,52 @@
-.Poster {
-        height: auto;
+
+
+
+    .ShuffleDiv {
         width: 100%;
-        display: block;
-        -webkit-box-shadow: 0 8px 17px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
-        box-shadow: 0 8px 17px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
-        border-radius: 10px;
+    }
+
+    .DivWrapper {
+        width: 400px;
+        min-width: 400px;
+        background: transparent;
+        border: none;
+        overflow: visible;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        margin: -19px auto;
+    }
+
+    .Poster {
+        cursor: pointer;
+        position: absolute;
+        height: 100%;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        border: 0;
     }
 
     .PosterContainer {
-        height: 100%;
         width: 100%;
-        position: absolute;
-        display: flex;
-        z-index: 2;
-        justify-content: center;
-        align-items: center;
-        transition: all 0.35s ease; 
-        /* top: 8px;
+        min-height: calc(400px * 1.5);
+        height: calc(400px * 1.5);
+        border-radius: 5px;
+        overflow: hidden;
+        -webkit-box-shadow: 0 8px 17px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
+        box-shadow: 0 8px 17px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
+    }
+
+    .PosterWrapper {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        top: 0;
         left: 0;
-        right: 0;
-        margin: 0 auto 0 auto;*/
+        display: inline-block;
     }
 
     .OverlayContainer {
@@ -32,11 +59,10 @@
         border-radius: 10px;
     }
 
-    .OverlayContainer .Overlay {
+    .Overlay {
         position: absolute;
         top: 0;
         left: 0;
-        display: block;
         height: 100%;
         width: 100%;
         opacity: 0;
@@ -46,7 +72,7 @@
         transition: all 0.4s ease-in-out;
     }
 
-    .OverlayContainer:hover .Overlay {
+    .Overlay:hover {
         opacity: 1;
     }
 

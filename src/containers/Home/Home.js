@@ -77,13 +77,13 @@ class Home extends Component {
             showing = this.state.nowShowing.map((photo) => {
                 return (
                         <InTheatrePoster
-                        key={photo.id}
-                        id={photo.id}
-                        poster_path={photo.poster_path}
-                        original_title={photo.title}
-                        rating={photo.vote_average}
-                        numVotes={photo.vote_count}
-                         />
+                            key={photo.id}
+                            id={photo.id}
+                            poster_path={photo.poster_path}
+                            original_title={photo.title}
+                            rating={photo.vote_average}
+                            numVotes={photo.vote_count}
+                        />
                  );
             })
         }
@@ -92,10 +92,11 @@ class Home extends Component {
             upcoming = this.state.upcoming.map((photo) => {
                 return (
                     <UpcomingPoster
-                    key={photo.id}
-                    poster_path={photo.poster_path}
-                    original_title={photo.title}
-                    release_date={moment(photo.release_date).format('MMM Do, YYYY')}
+                        key={photo.id}
+                        id={photo.id}
+                        poster_path={photo.poster_path}
+                        original_title={photo.title}
+                        release_date={moment(photo.release_date).format('MMM Do, YYYY')}
                     />
                  );
             })
@@ -107,11 +108,8 @@ class Home extends Component {
             trailerId = <Trailer id={this.state.upcoming[1].id}/>
         }
 
-        let homeDiv = {
-            overflow: 'hidden'
-        }
         return (
-            <div style={homeDiv}>
+            <div className={classes.HomeDiv}>
                 <TrailerModal show={this.state.viewModal} modalClosed={this.closeModalHandler}>
                     {this.state.playTrailer && trailerId}
                 </TrailerModal>

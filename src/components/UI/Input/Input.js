@@ -6,9 +6,9 @@ const input = (props) => {
     let inputElement = null;
     const inputClasses = [classes.Input];
 
-    if (props.invalid && props.shouldValidate && props.touched) {
-        inputClasses.push(classes.Invalid);
-    }
+    // if (props.invalid && props.shouldValidate && props.touched) {
+    //     return <span>{props.inputError}</span>
+    // }
 
     switch (props.elementType) {
         case ('input'):
@@ -51,6 +51,7 @@ const input = (props) => {
     
     return (
         <div className={classes.InputDiv}>
+            
             <label className={classes.Label}>{props.label}</label>
             {inputElement}
         </div>

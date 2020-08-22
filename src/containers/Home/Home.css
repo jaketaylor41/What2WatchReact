@@ -1,3 +1,9 @@
+
+.HomeDiv {
+    overflow: hidden;
+    margin-top: 10vh;
+}
+
 .Load {
 height: auto;
 width: 100%;

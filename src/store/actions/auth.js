@@ -50,21 +50,50 @@ export const setAuthRedirectPath = (path) => {
     };
 };
 
-
-export const auth = (email, password, isSignup) => {
+export const login = (email, password) => {
     return dispatch => {
         dispatch(authStart());
-        const authData = {
-            email: email,
-            password: password,
-            returnSecureToken: true
-        };
+
+            let authData = {
+               email: email,
+               password: password,
+               returnSecureToken: true
+           };
+
+            let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCvjKW6S7cpUsmLY6vAxHJCTRIy9Rk7oGk';
+
+        axios.post(url, authData)
+            .then(response => {
+                console.log(response);
+                const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000)
+                localStorage.setItem('token', response.data.idToken);
+                localStorage.setItem('expirationDate', expirationDate);
+                localStorage.setItem('userId', response.data.localId);
+                dispatch(authSuccess(response.data.idToken, response.data.localId));
+                dispatch(checkAuthTimeout(response.data.expiresIn))
+            })
+            .catch(err => {
+                console.log(err.response.data.error.message);
+                dispatch(authFail(err.response.data.error.message));
+            });
+    };
+
+}
+
+
+
+export const register = (name, email, password) => {
+    return dispatch => {
+        dispatch(authStart());
+
+        let authData = {
+                name: name,
+                email: email,
+                password: password,
+                returnSecureToken: true
+            };
 
         let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCvjKW6S7cpUsmLY6vAxHJCTRIy9Rk7oGk';
-
-        if(!isSignup) {
-            url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCvjKW6S7cpUsmLY6vAxHJCTRIy9Rk7oGk';
-        }
 
         axios.post(url, authData)
             .then(response => {

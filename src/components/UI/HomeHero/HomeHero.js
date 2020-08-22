@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {useState, useEffect} from 'react';
 import classes from './HomeHero.css';
 import { Container, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
@@ -6,42 +6,30 @@ import moment from 'moment';
 
 
 
-class HomeHero extends Component {
+const homeHero = (props) => {
 
-    state = {
-        trendingTV: []
-    }
+    const [trending, setTrending] = useState([]);
 
-    componentDidMount () {
-        this.fetchData();
-    }
+    useEffect( () => {
+        const fetchTrending = async () => {
+            const trendingRes = await axios('https://api.themoviedb.org/3/trending/tv/day?api_key=b2b33767c6b429003530678acd077911');
 
-    fetchData = () => {
-
-        axios.get('https://api.themoviedb.org/3/trending/tv/day?api_key=b2b33767c6b429003530678acd077911')
-        .then(response => {
-            const trendingShows = response.data.results;
-            this.setState({trendingTV: trendingShows});
-            console.log(trendingShows)
-
-        })
-        .catch(error => {
-            console.log(error);
-        });
-        
-    }
+            setTrending(trendingRes.data.results);
+            console.log(trendingRes.data.results);
+        };
+        fetchTrending();
+    }, []);
 
 
-    render () {
         return (
             <Container fluid>
                 <Row>
                     <Col style={{paddingRight: '0', maxWidth: '53.333333%'}} md={7}>
-                        <div className={classes.HomeHero} onClick={this.props.clicked}>
+                        <div className={classes.HomeHero} onClick={props.clicked}>
                             <div className={classes.BackdropContainer}>
                                 <div className={classes.Wrapper}>
                                     <img
-                                        src={'https://image.tmdb.org/t/p/original/' + this.props.trailerPhoto}
+                                        src={'https://image.tmdb.org/t/p/original/' + props.trailerPhoto}
                                         alt={"missing"}
                                         className={classes.HomeHeroImg}
                                     />
@@ -50,7 +38,7 @@ class HomeHero extends Component {
                                 <div>
                                     <span className={classes.HeroTitle}>Featured Trailer</span>
                                     <br></br>
-                                    <span className={classes.TrailerTitle}>{this.props.trailerTitle}</span>
+                                    <span className={classes.TrailerTitle}>{props.trailerTitle}</span>
                                 </div>
                             </div>
                                     <div className={classes.Overlay}></div>
@@ -66,7 +54,7 @@ class HomeHero extends Component {
                             <div className={classes.TrendingWrapper}>
                                 <div className={classes.ColumnContainer}>
                                     <div className={classes.ColumnWrapper}>
-                                            {this.state.trendingTV.map(show => (
+                                        {trending.map(show => (
                                             <div className={classes.TrendingSlots} key={show.id}>
                                                 <div className={classes.InfoContainer}>
                                                     <h2 className={classes.ShowInfo}>{show.original_name}</h2>
@@ -110,18 +98,8 @@ class HomeHero extends Component {
             </Container>
 
         );
-    }
+    } 
 
 
 
-
-
-
-
-
-
-} 
-
-
-
-export default HomeHero;
+export default homeHero;
