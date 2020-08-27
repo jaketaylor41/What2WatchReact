@@ -1,0 +1,115 @@
+
+.HomeDiv {
+    overflow: hidden;
+    margin-top: 10vh;
+}
+
+.Load {
+height: auto;
+width: 100%;
+background-color: rgba(0, 0, 0, 1);
+height: 200px;
+animation: sharpen 0.8s both;
+position: relative;
+padding-right: 15px;
+padding-left: 15px;
+flex-basis: 0;
+flex-grow: 1;
+min-width: 0;
+max-width: 100%;
+
+
+}
+
+@keyframes sharpen {
+from {
+    filter: blur(50px);
+}
+to {
+    filter: blur(none);
+}
+}
+
+.Container {
+    width: auto;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: flex-start;
+    padding-left: 35px;
+}
+
+.Row {
+    width: 100%;
+    max-width: 1500px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    transition: height .5s linear;
+    white-space: nowrap;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 20px 0 20px 0;
+}
+
+
+
+.SectionTwo {
+    margin: 20px 0 20px 0;
+    background-color: #F5F5F5;
+}
+
+.SectionTwoTitle {
+    font-weight: 600;
+    margin-left: 55px;
+    padding-top: 10px;
+}
+
+.SectionThreeTitle {
+    font-weight: 600;
+    margin-left: 55px;
+    padding-top: 10px;
+}
+
+.SectionThree {
+    margin: 20px 0 20px 0;
+    background-color: #F5F5F5;
+}
+
+.HomeModal {
+    transform: translateY(0px);
+    opacity: 1;
+    visibility: visible;
+    width: 650px;
+    left: calc(50% - 320px);
+    top: 30%;
+    position: fixed;
+    z-index: 500;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15);
+    padding: 16px;
+    transition: all 0.3s;
+    box-sizing: border-box;
+}
+
+.TrendingCol {
+    height: calc(38vw * .75);
+    overflow: scroll;
+}
+
+.TrailerCol {
+    padding-right: '0';
+    max-width: '53.333333%';
+}
+
+.TrendingTitle {
+    display: inline-block;
+    margin-left: 30px;
+}
+
+.TrendingTitle span{
+    font-size: 1.5em;
+    font-weight: 550;
+}
