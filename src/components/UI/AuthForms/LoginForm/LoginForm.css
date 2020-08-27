@@ -3,7 +3,6 @@
 }
 
 .CenterSection {
-    width: 700px;
     margin: 0 auto;
     padding-top: 20vh;
 }
@@ -96,6 +95,10 @@ label {
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
     padding: .84rem 2.14rem;
     font-size: .81rem;
+}
+
+.LoginButtonDiv button:active {
+    background-color: #1B2439;
 }
 
 .LoginButtonDiv button:hover {

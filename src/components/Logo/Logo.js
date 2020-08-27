@@ -4,7 +4,7 @@ import classes from './Logo.css';
 
 const logo = (props) => (
 
-    <div className={classes.Logo} style={{width: '100px'}}>
+    <div className={classes.Logo}>
         <a href="/">
         <img src={w2wIcon} alt="W2W" />
         </a>

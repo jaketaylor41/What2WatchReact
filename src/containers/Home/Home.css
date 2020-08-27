@@ -93,3 +93,23 @@ to {
     transition: all 0.3s;
     box-sizing: border-box;
 }
+
+.TrendingCol {
+    height: calc(38vw * .75);
+    overflow: scroll;
+}
+
+.TrailerCol {
+    padding-right: '0';
+    max-width: '53.333333%';
+}
+
+.TrendingTitle {
+    display: inline-block;
+    margin-left: 30px;
+}
+
+.TrendingTitle span{
+    font-size: 1.5em;
+    font-weight: 550;
+}

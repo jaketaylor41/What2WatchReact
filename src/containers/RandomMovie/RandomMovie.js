@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Poster from '../../components/Movie/Poster/Poster';
-import MovieControl from '../../components/Movie/MovieControl/MovieControl';
+import Poster from '../../components/Media/Poster/Poster';
+import MediaControl from '../../components/Media/MediaControl/MediaControl';
 import Modal from '../../components/UI/Modal/Modal';
-import Overview from '../../components/Movie/Overview/Overview';
+import Overview from '../../components/Media/Overview/Overview';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import classes from './RandomMovie.css';
 import Aux from '../../hoc/Aux/Aux';
@@ -16,8 +16,6 @@ import { connect } from 'react-redux';
 class RandomMovie extends Component {
 
     state = {
-        randomPage: Math.floor(Math.random() * 300) + 1,
-        randomMovie: null,
         viewModal: false,
         loading: false,
         addToWatchList: false,
@@ -25,49 +23,14 @@ class RandomMovie extends Component {
     }
 
     componentDidMount () {
-        this.fetchData();
+        this.props.onFetchRandomMovie();
     }
-
-
-    fetchData = () => {
-
-        axios.get(`https://api.themoviedb.org/3/movie/top_rated?page=${this.state.randomPage}&language=en-US&api_key=b2b33767c6b429003530678acd077911`)
-        .then(response => {
-            
-            const allMovies = response.data.results;
-            let filteredMovies = [];
-
-            for (let i = 0; i < allMovies.length; i++) {
-                if (allMovies[i].poster_path != null && allMovies[i].backdrop_path != null) {
-                    filteredMovies.push(allMovies[i]);
-                }
-            }
-            
-            const randomIndex = Math.floor(Math.random() * filteredMovies.length);
-            const randomMovie = filteredMovies[randomIndex];
-
-            this.setState({randomMovie: randomMovie});
-            this.setState({randomPage: Math.floor(Math.random() * 300) + 1});
-            this.setState({alreadyAdded: false});
-
-            console.log(this.state.randomPage);
-            console.log(allMovies);
-            console.log(filteredMovies);
-            console.log(this.state.randomMovie);
-
-        })
-        .catch(error => {
-            console.log(error);
-        });
-        
-    }
-
 
 
     toggleMovieHandler = () => {
         
         this.setState({loading: true});
-        this.fetchData();
+        this.props.onFetchRandomMovie();
         
         setTimeout(() => {
             this.setState({loading: false});
@@ -85,20 +48,32 @@ class RandomMovie extends Component {
         this.setState({viewModal: false});
     }
 
-
     addToWatchListHandler = () => {
 
-        this.setState({addToWatchList: true});
-        this.setState({alreadyAdded: true});
-
-        const watchData = {
-            title: this.state.randomMovie.original_title,
-            poster: this.state.randomMovie.poster_path,
-            userId: this.props.userId
+        if (this.props.isAuthenticated) {
+            this.setState({addToWatchList: true});
+            this.setState({alreadyAdded: true});
+    
+            const watchData = {
+                id: this.props.randomMovie.id,
+                poster: this.props.randomMovie.poster_path,
+                userId: this.props.userId
+            }
+    
+            this.props.onAddItem(watchData, this.props.token);
+        } else {
+            this.props.history.push('/sign-in');
         }
 
-        this.props.onAddItem(watchData, this.props.token);
+    }
 
+    convertDuration = (runtime) => {
+        let num = runtime;
+        let hours = (num / 60);
+        let roundedHours = Math.floor(hours);
+        let minutes = (hours - roundedHours) * 60;
+        let roundedMin = Math.round(minutes);
+        return roundedHours + 'h ' + roundedMin + 'min'
     }
 
     
@@ -113,24 +88,25 @@ class RandomMovie extends Component {
             disabledInfo = true;
         }
 
-        if (this.state.randomMovie) {
+        if (this.props.randomMovie) {
             movie = (
-                <div className={!this.state.loading && classes.Load}>
                     <Poster
-                        poster={this.state.randomMovie.poster_path}
-                        backdrop={this.state.randomMovie.backdrop_path}
+                        poster={this.props.randomMovie.poster_path}
+                        backdrop={this.props.randomMovie.backdrop_path}
                         clicked={this.showModalHandler}
                         loading={this.state.loading}
-                    />                        
-                </div>
+                    />
     
             );
             overview = <Overview
-                            title={this.state.randomMovie.title}
-                            rating={this.state.randomMovie.vote_average}
-                            numVotes={this.state.randomMovie.vote_count}
-                            date={moment(this.state.randomMovie.release_date).format('MMMM Do, YYYY')}
-                            overview={this.state.randomMovie.overview}/>
+                            title={this.props.randomMovie.title}
+                            rating={this.props.randomMovie.vote_average}
+                            numVotes={this.props.randomMovie.vote_count}
+                            duration={this.convertDuration(this.props.randomMovie.runtime)}
+                            genre={this.props.randomMovie.genres.map((genres, index) => ( (index ? ', ' : '') + genres.name))}
+                            mpaa={this.props.randomMovie.mpaa ? this.props.randomMovie.mpaa : 'NR'}
+                            date={moment(this.props.randomMovie.release_date).format('MMMM Do, YYYY')}
+                            overview={this.props.randomMovie.overview}/>
         }
 
         if (this.state.loading) {
@@ -143,7 +119,7 @@ class RandomMovie extends Component {
 
         return (
             <Aux>
-                <div>
+                <div className={classes.RandomMovieDiv}>
                     <Modal show={this.state.viewModal} modalClosed={this.closeModalHandler}>
                         {overview}
                     </Modal>
@@ -156,14 +132,14 @@ class RandomMovie extends Component {
                         </div>
                     </div>
 
-
-                </div>
-
-                <MovieControl
+                <MediaControl
                 toggleMovie={this.toggleMovieHandler}
                 addToList={this.addToWatchListHandler}
                 disabled={disabledInfo}
                 added={this.state.addToWatchList} />
+
+                </div>
+
 
 
             </Aux>
@@ -175,14 +151,17 @@ class RandomMovie extends Component {
 
 const mapStateToProps = state => {
     return {
+        randomMovie: state.randomMovie.randomMovie,
         token: state.auth.token,
-        userId: state.auth.userId
+        userId: state.auth.userId,
+        isAuthenticated: state.auth.token !== null
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAddItem: (watchData, token, userId) => dispatch(actions.addWatchItem(watchData, token))
+        onFetchRandomMovie: () => dispatch( actions.fetchRandomMovie()),
+        onAddItem: (watchData, token) => dispatch(actions.addWatchItem(watchData, token))
     };
 };
 

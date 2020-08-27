@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Poster from '../../components/Movie/Poster/Poster';
-import MovieControl from '../../components/Movie/MovieControl/MovieControl';
+import Poster from '../../components/Media/Poster/Poster';
+import MediaControl from '../../components/Media/MediaControl/MediaControl';
 import Modal from '../../components/UI/Modal/Modal';
-import Overview from '../../components/Movie/Overview/Overview';
+import Overview from '../../components/Media/Overview/Overview';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import classes from './RandomShow.css';
 import Aux from '../../hoc/Aux/Aux';
+import moment from 'moment';
 
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import * as actions from '../../store/actions/index';
@@ -15,8 +16,6 @@ import { connect } from 'react-redux';
 class RandomTVshow extends Component {
 
     state = {
-        randomPage: Math.floor(Math.random() * 57),
-        randomShow: null,
         viewModal: false,
         loading: false,
         addToWatchList: false,
@@ -24,39 +23,7 @@ class RandomTVshow extends Component {
     }
 
     componentDidMount () {
-        this.fetchData();
-    }
-
-
-    fetchData = () => {
-
-        axios.get(`https://api.themoviedb.org/3/tv/top_rated?api_key=b2b33767c6b429003530678acd077911&language=en-US&page=${this.state.randomPage}`)
-        .then(response => {
-            
-            const allShows = response.data.results;
-            let filteredShows = [];
-            for (let i = 0; i < allShows.length; i++) {
-                if (allShows[i].poster_path != null && allShows[i].backdrop_path != null) {
-                    filteredShows.push(allShows[i]);
-                }
-            }
-            console.log(filteredShows)
-            const randomIndex = Math.floor(Math.random() * filteredShows.length);
-            const randomShow = filteredShows[randomIndex];
-            
-            this.setState({randomShow: randomShow});
-            this.setState({randomPage: Math.floor(Math.random() * 57) + 1});
-            this.setState({alreadyAdded: false});
-            
-            console.log(allShows);
-            console.log(this.state.randomPage);
-            console.log(this.state.randomShow);
-
-        })
-        .catch(error => {
-            console.log(error);
-        });
-        
+        this.props.onFetchRandomShow();
     }
 
 
@@ -64,7 +31,7 @@ class RandomTVshow extends Component {
     toggleMovieHandler = () => {
         
         this.setState({loading: true});
-        this.fetchData();
+        this.props.onFetchRandomShow();
         
         setTimeout(() => {
             this.setState({loading: false});
@@ -85,16 +52,21 @@ class RandomTVshow extends Component {
 
     addToWatchListHandler = () => {
 
-        this.setState({addToWatchList: true});
-        this.setState({alreadyAdded: true});
-
-        const watchData = {
-            title: this.state.randomShow.original_title,
-            poster: this.state.randomShow.poster_path,
-            userId: this.props.userId
+        if (this.props.isAuthenticated) {
+            this.setState({addToWatchList: true});
+            this.setState({alreadyAdded: true});
+    
+            const watchData = {
+                id: this.props.randomShow.id,
+                poster: this.props.randomShow.poster_path,
+                userId: this.props.userId
+            }
+    
+            this.props.onAddItem(watchData, this.props.token);
+        } else {
+            this.props.history.push('/sign-in');
         }
 
-        this.props.onAddItem(watchData, this.props.token);
 
     }
 
@@ -110,21 +82,25 @@ class RandomTVshow extends Component {
             disabledInfo = true;
         }
 
-        if (this.state.randomShow) {
+        if (this.props.randomShow) {
             show = (
                 <div className={!this.state.loading && classes.Load}>
                     <Poster
-                        poster={this.state.randomShow.poster_path}
-                        backdrop={this.state.randomShow.backdrop_path}
+                        poster={this.props.randomShow.poster_path}
+                        backdrop={this.props.randomShow.backdrop_path}
                         clicked={this.showModalHandler}
                         loading={this.state.loading}
                     />                        
                 </div>
     
             );
-            overview = <Overview title={this.state.randomShow.name}
-                            date={this.state.randomShow.first_air_date}
-                            overview={this.state.randomShow.overview}/>
+            overview = <Overview
+                            title={this.props.randomShow.name}
+                            rating={this.props.randomShow.vote_average}
+                            numVotes={this.props.randomShow.vote_count}
+                            date={moment(this.props.randomShow.first_air_date).format('MMMM Do, YYYY')}
+                            overview={this.props.randomShow.overview}
+                        />
         }
 
         if (this.state.loading) {
@@ -137,12 +113,12 @@ class RandomTVshow extends Component {
 
         return (
             <Aux>
-                <div>
+                <div className={classes.RandomShowDiv}>
                     <Modal show={this.state.viewModal} modalClosed={this.closeModalHandler}>
                         {overview}
                     </Modal>
                     
-                    <div className={classes.MovieContainer} style={{filter: this.state.viewModal ? 'blur(5px)' : 'none'}}> 
+                    <div className={classes.ShowContainer} style={{filter: this.state.viewModal ? 'blur(5px)' : 'none'}}> 
                         <div>
                             <div className={classes.ImageWrapper}>
                                 {show}
@@ -150,33 +126,32 @@ class RandomTVshow extends Component {
                         </div>
                     </div>
 
+                    <MediaControl
+                        toggleMovie={this.toggleMovieHandler}
+                        addToList={this.addToWatchListHandler}
+                        disabled={disabledInfo}
+                        added={this.state.addToWatchList}
+                    />
 
                 </div>
-
-                <MovieControl
-                toggleMovie={this.toggleMovieHandler}
-                addToList={this.addToWatchListHandler}
-                disabled={disabledInfo}
-                added={this.state.addToWatchList} />
-
-
             </Aux>
-
         );
     }
-
 }
 
 const mapStateToProps = state => {
     return {
+        randomShow: state.randomShow.randomShow,
         token: state.auth.token,
-        userId: state.auth.userId
+        userId: state.auth.userId,
+        isAuthenticated: state.auth.token !== null
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAddItem: (watchData, token, userId) => dispatch(actions.addWatchItem(watchData, token))
+        onFetchRandomShow: () => dispatch(actions.fetchRandomShow()),
+        onAddItem: (watchData, token) => dispatch(actions.addWatchItem(watchData, token))
     };
 };
 

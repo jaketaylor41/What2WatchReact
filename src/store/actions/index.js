@@ -7,5 +7,19 @@ export {
 } from './auth';
 export {
     fetchWatchList,
-    addWatchItem
+    addWatchItem,
+    removeWatchItem
 } from './watchList';
+export {
+    fetchRandomMovie,
+    fetchRandomShow,
+    fetchMovieDetails
+} from './random';
+export {
+    fetchNowPlaying,
+    fetchUpcoming,
+    fetchVideoKey,
+    fetchTrendingTv,
+    showModal,
+    hideModal
+} from './home'

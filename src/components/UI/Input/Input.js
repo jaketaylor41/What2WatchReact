@@ -51,7 +51,8 @@ const input = (props) => {
     
     return (
         <div className={classes.InputDiv}>
-            
+            {props.error ? <span className={classes.Error}>{props.inputError}</span> : null}
+            {props.emptyForm ? <span className={classes.Error}>{props.inputError}</span> : null}
             <label className={classes.Label}>{props.label}</label>
             {inputElement}
         </div>

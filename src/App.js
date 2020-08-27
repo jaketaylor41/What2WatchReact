@@ -1,14 +1,30 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
+import * as actions from './store/actions/index';
+import asyncComponent from './hoc/asyncComponent/asyncComponent';
+
 import Layout from './hoc/Layout/Layout';
 import Home from './containers/Home/Home';
-import RandomMovie from './containers/RandomMovie/RandomMovie';
-import RandomTVShow from './containers/RandomTVShow/RandomTVShow';
-import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
-import WatchList from './containers/WatchList/WatchList';
-import Auth from './containers/Auth/Auth';
 import Logout from './containers/Auth/Logout/Logout';
-import { connect } from 'react-redux';
-import * as actions from './store/actions/index';
+
+
+const asyncRandomMovie = asyncComponent(() => {
+  return import('./containers/RandomMovie/RandomMovie');
+});
+
+const asyncRandomTVShow = asyncComponent(() => {
+  return import('./containers/RandomTVShow/RandomTVShow');
+});
+
+const asyncAuth = asyncComponent(() => {
+  return import('./containers/Auth/Auth');
+});
+
+const asyncWatchList = asyncComponent(() => {
+  return import('./containers/WatchList/WatchList');
+});
+
 
 
 
@@ -22,11 +38,11 @@ class App extends Component {
 
     let routes = (
       <Switch>
-        <Route path="/sign-in" component={Auth} />
+        <Route path="/sign-in" component={asyncAuth} />
         <Route path="/" exact component={Home} />
-        <Route path="/watch-list" component={WatchList} />
-        <Route path="/random-movie" component={RandomMovie} />
-        <Route path="/random-tv-show" component={RandomTVShow} />
+        <Route path="/watch-list" component={asyncAuth} />
+        <Route path="/random-movie" component={asyncRandomMovie} />
+        <Route path="/random-tv-show" component={asyncRandomTVShow} />
         <Redirect to="/" />
       </Switch>
     );
@@ -35,9 +51,9 @@ class App extends Component {
       routes = (
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/watch-list" component={WatchList} />
-          <Route path="/random-movie" component={RandomMovie} />
-          <Route path="/random-tv-show" component={RandomTVShow} />
+          <Route path="/watch-list" component={asyncWatchList} />
+          <Route path="/random-movie" component={asyncRandomMovie} />
+          <Route path="/random-tv-show" component={asyncRandomTVShow} />
           <Route path="/logout" component={Logout} />
           <Redirect to="/" />
       </Switch>
@@ -47,7 +63,7 @@ class App extends Component {
 
 
     return (
-      <div>
+      <div style={{height: '100%'}}>
         <Layout>
           {routes}
         </Layout>

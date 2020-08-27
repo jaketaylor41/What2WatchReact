@@ -12,6 +12,12 @@
     margin-bottom: 0;
 }
 
+.Error {
+    font-size: 10px;
+    float: right;
+    color: red;
+}
+
 .Input {
     background-color: #fff;
     height: 31px;

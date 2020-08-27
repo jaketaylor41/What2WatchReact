@@ -23,7 +23,8 @@ class Auth extends Component {
                 value: '',
                 validation: {
                     required: true,
-                    isEmail: true
+                    isEmail: true,
+                    errorMessage: ''
                 },
                 valid: false,
                 touched: false
@@ -38,7 +39,8 @@ class Auth extends Component {
                 value: '',
                 validation: {
                     required: true,
-                    minLength: 8
+                    minLength: 6,
+                    errorMessage: ''
                 },
                 valid: false,
                 touched: false
@@ -54,7 +56,8 @@ class Auth extends Component {
                 },
                 value: '',
                 validation: {
-                    required: true
+                    required: true,
+                    errorMessage: ''
                 },
                 valid: false,
                 touched: false
@@ -69,7 +72,8 @@ class Auth extends Component {
                 value: '',
                 validation: {
                     required: true,
-                    isEmail: true
+                    isEmail: true,
+                    errorMessage: ''
                 },
                 valid: false,
                 touched: false
@@ -85,7 +89,7 @@ class Auth extends Component {
                 validation: {
                     required: true,
                     minLength: 6,
-                    match: true
+                    errorMessage: ''
                 },
                 valid: false,
                 touched: false
@@ -101,12 +105,16 @@ class Auth extends Component {
                 validation: {
                     required: true,
                     minLength: 6,
-                    match: true
+                    match: true,
+                    errorMessage: ''
                 },
                 valid: false,
                 touched: false
             },
         },
+        formIsValid: false,
+        formEmpty: true,
+        formError: false,
         isSignup: false
         
     }
@@ -127,7 +135,7 @@ class Auth extends Component {
         }
 
         if (rules.match) {
-            isValid = this.state.regControls.password.value === this.state.regControls.verifyPassword.value && isValid;
+            isValid = value === this.state.regControls.password.value && isValid;
         }
 
         if ( rules.isEmail ) {
@@ -136,6 +144,30 @@ class Auth extends Component {
         }
 
         return isValid;
+    }
+
+    setErrorMessage (value, rules) {
+        let message = '';
+
+        if (rules.required) {
+            if (value.trim() === '') {
+                message = 'Field is required'
+            }
+        }
+
+        if (rules.minLength) {
+            if (value.length < rules.minLength) {
+                message = 'Password must be 6 characters long'
+            }
+        }
+
+        if (rules.match) {
+            if (value !== this.state.regControls.password.value) {
+                message = 'Passwords do not match'
+            }
+        }
+
+        return message;
     }
 
     inputChangedHandler = ( event, controlName ) => {
@@ -147,10 +179,16 @@ class Auth extends Component {
                     ...this.state.loginControls[controlName],
                     value: event.target.value,
                     valid: this.checkValidity( event.target.value, this.state.loginControls[controlName].validation ),
+                    errorMessage: this.setErrorMessage( event.target.value, this.state.loginControls[controlName].validation ),
                     touched: true
                 } 
             };
-            this.setState({loginControls: updatedLogControls});
+
+            let formIsValid = true;
+            for (let inputIdentifier in updatedLogControls) {
+                formIsValid = updatedLogControls[inputIdentifier].valid && formIsValid;
+            }
+            this.setState({loginControls: updatedLogControls, formIsValid: formIsValid, formEmpty: false});
         }
 
         if (this.state.isSignup) {
@@ -160,31 +198,53 @@ class Auth extends Component {
                     ...this.state.regControls[controlName],
                     value: event.target.value,
                     valid: this.checkValidity( event.target.value, this.state.regControls[controlName].validation ),
+                    errorMessage: this.setErrorMessage( event.target.value, this.state.regControls[controlName].validation ),
                     touched: true
                 }
             };
-    
-            this.setState({regControls: updatedRegControls});
+
+            let formIsValid = true;
+            for (let inputIdentifier in updatedRegControls) {
+                formIsValid = updatedRegControls[inputIdentifier].valid && formIsValid;
+            }
+            this.setState({regControls: updatedRegControls, formIsValid: formIsValid, formEmpty: false});
         }
     }
 
     submitHandler = ( event ) => {
+
+        if (this.state.formEmpty === true) {
+            alert("Fields Required")
+        }
+
         event.preventDefault();
         if (this.state.isSignup) {
-            this.props.onRegister(
-                this.state.regControls.name.value,
-                this.state.regControls.email.value,
-                this.state.regControls.password.value,
-                this.state.isSignup
+            if (this.state.formIsValid === true) {
+                this.props.onRegister(
+                    this.state.regControls.name.value,
+                    this.state.regControls.email.value,
+                    this.state.regControls.password.value,
+                    this.state.isSignup
                 );
+            }
+
+            if (this.state.formIsValid === false) {
+                this.setState({formError: true});
+            }
         }
 
         if (!this.state.isSignup) {
-            this.props.onLogin(
-                this.state.loginControls.email.value,
-                this.state.loginControls.password.value,
-                this.state.isSignup
+            if (this.state.formIsValid === true) {
+                this.props.onLogin(
+                    this.state.loginControls.email.value,
+                    this.state.loginControls.password.value,
+                    this.state.isSignup
                 );
+            }
+
+            if (this.state.formIsValid === false) {
+                this.setState({formError: true});
+            }
         }
     }
 
@@ -222,7 +282,8 @@ class Auth extends Component {
                    elementConfig={formElement.config.elementConfig}
                    value={formElement.config.value}
                    invalid={!formElement.config.valid}
-                   inputError={formElement.config.error}
+                   error={this.state.formError}
+                   inputError={formElement.config.errorMessage}
                    shouldValidate={formElement.config.validation}
                    touched={formElement.config.touched}
                    changed={( event ) => this.inputChangedHandler( event, formElement.id )}
@@ -239,7 +300,8 @@ class Auth extends Component {
                    elementConfig={formElement.config.elementConfig}
                    value={formElement.config.value}
                    invalid={!formElement.config.valid}
-                   inputError={formElement.config.valid}
+                   error={this.state.formError}
+                   inputError={formElement.config.errorMessage}
                    shouldValidate={formElement.config.validation}
                    touched={formElement.config.touched}
                    changed={( event ) => this.inputChangedHandler( event, formElement.id )}

@@ -1,0 +1,169 @@
+
+
+
+    .ShuffleDiv {
+        width: 100%;
+    }
+
+    .DivWrapper {
+        width: 400px;
+        min-width: 400px;
+        background: transparent;
+        border: none;
+        overflow: visible;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        margin: -19px auto;
+    }
+
+    .Poster {
+        cursor: pointer;
+        position: absolute;
+        height: 100%;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        border: 0;
+    }
+
+
+    .PosterContainer {
+        width: 100%;
+        min-height: calc(400px * 1.5);
+        height: calc(400px * 1.5);
+        border-radius: 5px;
+        overflow: hidden;
+        -webkit-box-shadow: 0 8px 17px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
+        box-shadow: 0 8px 17px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
+        animation-name: fadeIn;
+        animation-duration: 0.3s;
+        animation-direction: alternate;
+        animation-timing-function: ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from {
+            filter: blur(8px);
+        }
+        to {
+            filter: blur(none);
+        }
+    }
+
+    .PosterWrapper {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        top: 0;
+        left: 0;
+        display: inline-block;
+    }
+
+    .OverlayContainer {
+        position: relative;
+        width: 70%;
+        max-width:500px;
+        height: auto;
+        /* margin: auto;
+        overflow: hidden; */
+        border-radius: 10px;
+    }
+
+    .Overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        opacity: 0;
+        cursor: pointer;
+        border-radius: 5px;
+        background-color: rgba(255,255,255,.19);
+        transition: all 0.4s ease-in-out;
+    }
+
+    .Overlay:hover {
+        opacity: 1;
+    }
+
+    .Backdrop {
+        height: auto;
+        width: 100%;
+        max-height: 100%;
+        box-shadow: 0 8px 17px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
+        opacity: 0.7;
+    }
+
+
+
+    @media (min-width: 500px) {
+
+        .OverlayContainer {
+            width: 45%;
+        }
+
+    }
+
+
+    @media (min-width: 1200px) {
+        .ImageWrapper {
+            margin: 0 auto;
+        }
+    }
+
+    .LoadingWrapper {
+        width: 400px;
+        min-width: 400px;
+        background-color: #f5f5f5;
+        border: none;
+        overflow: visible;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        margin: -19px auto;
+    }
+
+    .PosterLoading {
+        width: 100%;
+        min-height: calc(400px * 1.5);
+        height: calc(400px * 1.5);
+        border-radius: 5px;
+        overflow: hidden;
+        background-color: #f5f5f5;
+        background-image: url('/src/assets/images/moviesBg.jpg');
+        background-size: contain;
+        background-repeat: none;
+        -webkit-box-shadow: 0 8px 17px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
+        box-shadow: 0 8px 17px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
+        animation-name: sharpen;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+        animation-timing-function: ease-in-out;
+    }
+
+
+    @keyframes sharpen {
+        0%   {filter: blur(none)}
+        100% {filter: blur(8px)}
+    }
+
+    .Section {
+        animation-name: fadeIn;
+        animation-duration: 0.3s;
+        animation-direction: alternate;
+        animation-timing-function: ease-in-out;
+    }
+
+    .LoadingSection {
+        animation-name: sharpen;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+        animation-timing-function: ease-in-out;
+    }

@@ -31,6 +31,7 @@ export const addWatchItem = (watchData, token) => {
     };
 };
 
+
 export const setWatchList = ( watchList ) => {
     return {
         type: actionTypes.SET_WATCHLIST,
@@ -70,9 +71,8 @@ export const fetchWatchList = (token, userId) => {
                 for (let key in response.data) {
                     fetchedWatchList.push( {
                         ...response.data[key],
-                        id: key
+                        itemId: key
                     } );
-                    console.log(fetchedWatchList)
                 }
                 dispatch((fetchWatchListSuccess(fetchedWatchList)));
             })
@@ -80,4 +80,19 @@ export const fetchWatchList = (token, userId) => {
                 dispatch(fetchWatchListFail(err));
             } );
     }
+}
+
+
+export const removeWatchItem = (token, userId, itemKey) => {
+    return dispatch => {
+        
+        axios.delete(`https://what2watch-cf980.firebaseio.com/userData/${itemKey}.json?auth=${token}`)
+            .then( response => {
+                dispatch(fetchWatchList(token, userId));
+            })
+            .catch( err => {
+                dispatch(fetchWatchListFail(err));
+            })
+    }
+
 }

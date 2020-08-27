@@ -1,7 +1,7 @@
 .Loader,
 .Loader:before,
 .Loader:after {
-  border-radius: 50%;
+  border-radius: 15%;
   width: 2.5em;
   height: 2.5em;
   -webkit-animation-fill-mode: both;
