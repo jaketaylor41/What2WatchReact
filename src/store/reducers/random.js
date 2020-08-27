@@ -4,9 +4,8 @@ import { updateObject } from '../utility';
 
 const initialState = {
     randomMovie: null,
-    genres: [],
-    videos: null,
     randomShow: null,
+    videos: null,
     loading: false
 }
 
@@ -25,7 +24,7 @@ const fetchRandomMovieFail = (state, action) => {
 
 const fetchRandomShowSuccess = (state, action) => {
     return updateObject( state, {
-        randomShow: action.randomShow
+        randomShow: action.randomShow[0]
     });
 }
 

@@ -11,7 +11,6 @@ import Aux from '../../hoc/Aux/Aux';
 class WatchList extends Component {
 
     componentDidMount() {
-        console.log("Mounted");
         this.props.onFetchWatchList(this.props.token, this.props.userId);
     }
 

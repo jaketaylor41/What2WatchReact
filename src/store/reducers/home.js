@@ -7,9 +7,7 @@ const initialState = {
     upcoming: null,
     trendingTv: null,
     trailerInfo: [],
-    videoKey: null,
-    viewModal: false,
-    playTrailer: false
+    videoKey: null
 }
 
 
@@ -78,27 +76,6 @@ const fetchTrendingTvFail = (state, action) => {
     return updateObject( state, {loading: false});
 }
 
-//==========================================================================================================
-//  SHOW/HIDE MODAL
-//==========================================================================================================
-
-const showModal = (state, action) => { 
-    const updateState = {
-        viewModal: true,
-        playTrailer: true
-    }
-    return updateObject(state, updateState);
-};
-
-const hideModal = (state, action) => { 
-    const updateState = {
-        viewModal: false,
-        playTrailer: false
-    }
-    return updateObject(state, updateState);
-};
-
-
 
 
 const reducer = ( state = initialState, action ) => {
@@ -111,8 +88,6 @@ const reducer = ( state = initialState, action ) => {
         case actionTypes.FETCH_VIDEO_KEY_FAIL: return fetchVideoKeyFail(state, action);
         case actionTypes.FETCH_TRENDING_TV_SUCCESS: return fetchTrendingTvSuccess(state, action);
         case actionTypes.FETCH_TRENDING_TV_FAIL: return fetchTrendingTvFail(state, action);
-        case actionTypes.SHOW_MODAL: return showModal(state, action);
-        case actionTypes.HIDE_MODAL: return hideModal(state, action);
         default: return state;
     }
 };

@@ -13,7 +13,7 @@ const trailerInfo = (props) => (
                 />
                 <div className={classes.PlayBtn}>
                     <i className={"fa fa-play"}></i>
-                    <div>
+                    <div className={classes.PlayBtnItems}>
                         <span className={classes.HeroTitle}>Featured Trailer</span>
                         <br></br>
                         <span className={classes.TrailerTitle}>{props.trailerTitle}</span>

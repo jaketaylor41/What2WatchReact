@@ -66,8 +66,15 @@ class RandomTVshow extends Component {
         } else {
             this.props.history.push('/sign-in');
         }
+    }
 
-
+    convertDuration = (runtime) => {
+        let num = runtime;
+        let hours = (num / 60);
+        let roundedHours = Math.floor(hours);
+        let minutes = (hours - roundedHours) * 60;
+        let roundedMin = Math.round(minutes);
+        return roundedHours + 'h ' + roundedMin + 'min'
     }
 
     
@@ -98,6 +105,9 @@ class RandomTVshow extends Component {
                             title={this.props.randomShow.name}
                             rating={this.props.randomShow.vote_average}
                             numVotes={this.props.randomShow.vote_count}
+                            duration={this.convertDuration(this.props.randomShow.episode_run_time)}
+                            genre={this.props.randomShow.genres.map((genres, index) => ( (index ? ', ' : '') + genres.name))}
+                            mpaa={this.props.randomShow.mpaa ? this.props.randomShow.mpaa : 'NR'}
                             date={moment(this.props.randomShow.first_air_date).format('MMMM Do, YYYY')}
                             overview={this.props.randomShow.overview}
                         />

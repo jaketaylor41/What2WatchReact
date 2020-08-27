@@ -25,8 +25,6 @@ const rootReducer = combineReducers({
     randomMovie: randomReducer,
     trendingTv: homeReducer,
     trailerInfo: homeReducer,
-    ratings: homeReducer,
-    genres: homeReducer,
     videoKey: homeReducer,
     watchList: watchListReducer,
     auth: authReducer

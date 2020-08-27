@@ -59,10 +59,11 @@
     align-items: center;
     min-width: 0px;
     position: absolute;
-    bottom: 20px;
+    bottom: 0;
     right: 0px;
     left: 0;
-    margin: 16px 16px 0px;
+    height: 200px;
+    background: linear-gradient(180deg, rgba(0,0,0,0.055059523809523836) 0%, rgba(0,0,0,1) 100%);
 }
 
 .PlayBtn i {
@@ -72,6 +73,11 @@
     padding: 1rem 1rem 1rem 1.5rem;
     line-height: 1;
     color: #fff;
+    margin: 80px 0 0 15px;
+}
+
+.PlayBtnItems {
+    margin-top: 80px;
 }
 
 

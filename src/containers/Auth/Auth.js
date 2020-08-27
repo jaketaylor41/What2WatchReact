@@ -7,7 +7,7 @@ import bgImage from '../../assets/images/moviesBg.jpg';
 //import classes from './Auth.css';
 import LoginForm from '../../components/UI/AuthForms/LoginForm/LoginForm';
 import RegForm from '../../components/UI/AuthForms/RegForm/RegForm';
-
+//import { GoogleLogin } from 'react-google-login';
 
 class Auth extends Component {
 

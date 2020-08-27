@@ -13,13 +13,12 @@ export {
 export {
     fetchRandomMovie,
     fetchRandomShow,
-    fetchMovieDetails
+    fetchMovieDetails,
+    fetchShowDetails
 } from './random';
 export {
     fetchNowPlaying,
     fetchUpcoming,
     fetchVideoKey,
-    fetchTrendingTv,
-    showModal,
-    hideModal
+    fetchTrendingTv
 } from './home'

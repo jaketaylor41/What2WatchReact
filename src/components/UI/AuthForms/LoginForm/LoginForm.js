@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import classes from './LoginForm.css';
+//import GoogleForm from '../GoogleForm/GoogleForm';
 
 class LoginForm extends Component {
 
@@ -22,6 +23,8 @@ class LoginForm extends Component {
 
                                             <div className={classes.Divider}>
                                                 <hr />
+                                                {/* <p>Sign in with Google</p>
+                                                <GoogleForm /> */}
                                             </div>
 
                                             <div className={classes.Already}>

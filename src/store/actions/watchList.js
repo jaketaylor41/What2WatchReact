@@ -19,11 +19,9 @@ export const addWatchItemSuccess = (id, watchData) => {
 
 export const addWatchItem = (watchData, token) => {
     return dispatch => {
-        //dispatch( addWatchItemStart() );
         axios.post('https://what2watch-cf980.firebaseio.com/userData.json?auth=' + token, watchData)
             .then( response => {
                 dispatch(addWatchItemSuccess(response.data, watchData))
-                console.log(response.data);
             } )
             .catch(error => {
                 dispatch( addWatchItemFail(error) );

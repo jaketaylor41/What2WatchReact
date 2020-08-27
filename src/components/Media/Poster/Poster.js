@@ -15,25 +15,25 @@ class Poster extends Component {
 
     render () {
 
-        let sectionBg = {};
-        if (this.state.imageLoaded) {
-             sectionBg = {
-                background: `linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url( https://image.tmdb.org/t/p/original/${this.props.backdrop})`,
-                width: '100%',
-                height: 'calc(1000px * .5625)',
-                position: 'relative'
-            }
-        }
+        // let sectionBg = {};
+        // if (this.state.imageLoaded) {
+        //      sectionBg = {
+        //         background: `linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url( https://image.tmdb.org/t/p/original/${this.props.backdrop})`,
+        //         width: '100%',
+        //         height: 'calc(1000px * .5625)',
+        //         position: 'relative'
+        //     }
+        // }
 
-        if (!this.state.imageLoaded) {
-            sectionBg = {
-                backgroundColor: '#f5f5f5',
-                backgroundSize: 'cover',
-                width: '100%',
-                height: 'calc(1000px * .5625)',
-                position: 'relative'
-            }
-        }
+        // if (!this.state.imageLoaded) {
+        //     sectionBg = {
+        //         backgroundColor: '#f5f5f5',
+        //         backgroundSize: 'cover',
+        //         width: '100%',
+        //         height: 'calc(1000px * .5625)',
+        //         position: 'relative'
+        //     }
+        // }
 
         const loadImageClasses = [];
         if (!this.state.imageLoaded) {
@@ -63,7 +63,13 @@ class Poster extends Component {
         return (
             <Aux>
                 <div className={classes.ShuffleDiv}>
-                    <section className={loadingSection.join(' ')} style={sectionBg}>
+                    <section className={loadingSection.join(' ')}>
+                    <img src={'https://image.tmdb.org/t/p/original/' + this.props.backdrop}
+                                        className={classes.Backdrop}
+                                        style={{visibility: this.state.imageLoaded ? 'visible' : 'hidden'}}
+                                        alt="missing poster"
+                                        onLoad={this.setImageLoaded}
+                                    />
                         <div className={wrapperClasses.join(' ')}>
                             <div className={loadImageClasses.join(' ')} onClick={this.props.clicked}>
                                 <div className={classes.PosterWrapper}>
