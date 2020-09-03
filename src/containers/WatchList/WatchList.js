@@ -10,6 +10,7 @@ import Aux from '../../hoc/Aux/Aux';
 
 class WatchList extends Component {
 
+
     componentDidMount() {
         this.props.onFetchWatchList(this.props.token, this.props.userId);
     }
@@ -27,14 +28,19 @@ class WatchList extends Component {
         let watchItem = null;
 
         watchItem = this.props.watchList.map((item, idx) => (
-            <Col key={item.poster}>
-                <Item
-                    poster={item.poster}
-                    removeItem={() => this.removeFromListHandler(item.itemId)} 
-                />
-            </Col>
-
+                <Col className={classes.ItemCol} key={item.poster} xs="auto" sm="auto" md="auto" lg="auto">
+                    <Item
+                        poster={item.poster}
+                        title={item.title}
+                        mpaa={item.mpaa}
+                        duration={item.duration}
+                        removeItem={() => this.removeFromListHandler(item.itemId)}
+                    />
+                </Col>
             ));
+
+
+
 
         return(
             <Aux>
@@ -45,12 +51,7 @@ class WatchList extends Component {
                             <h1 className={classes.MyList}>My List</h1>
                             <hr />
                         </div>
-                        <Row className={classes.Row}
-                        xs={2}
-                        md={4}
-                        lg={5}
-                        xl={7}
-                        >
+                        <Row className={classes.Row} xs={1}>
                             {watchItem}
                         </Row>
                     </Container>

@@ -7,10 +7,13 @@
 }
 
 .NavigationItem a {
+    font-size: .875rem;
+    text-align: center;
     text-decoration: none;
     width: 100%;
     box-sizing: border-box;
     display:  block;
+    color: #343d52;
 }
 
 .NavigationItem a:hover,

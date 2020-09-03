@@ -30,6 +30,7 @@ class RandomMovie extends Component {
     toggleMovieHandler = () => {
         
         this.setState({loading: true});
+        this.setState({alreadyAdded: false});
         this.props.onFetchRandomMovie();
         
         setTimeout(() => {
@@ -57,6 +58,9 @@ class RandomMovie extends Component {
             const watchData = {
                 id: this.props.randomMovie.id,
                 poster: this.props.randomMovie.poster_path,
+                title: this.props.randomMovie.title,
+                mpaa: this.props.randomMovie.mpaa ? this.props.randomMovie.mpaa : 'NR',
+                duration: this.convertDuration(this.props.randomMovie.runtime),
                 userId: this.props.userId
             }
     

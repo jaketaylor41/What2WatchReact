@@ -5,20 +5,18 @@
 }
 
 .Load {
-height: auto;
-width: 100%;
-background-color: rgba(0, 0, 0, 1);
-height: 200px;
-animation: sharpen 0.8s both;
-position: relative;
-padding-right: 15px;
-padding-left: 15px;
-flex-basis: 0;
-flex-grow: 1;
-min-width: 0;
-max-width: 100%;
-
-
+    height: auto;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 1);
+    height: 200px;
+    animation: sharpen 0.8s both;
+    position: relative;
+    padding-right: 15px;
+    padding-left: 15px;
+    flex-basis: 0;
+    flex-grow: 1;
+    min-width: 0;
+    max-width: 100%;
 }
 
 @keyframes sharpen {
@@ -37,7 +35,13 @@ to {
     flex-wrap: wrap;
     align-items: flex-start;
     align-content: flex-start;
-    padding-left: 35px;
+    padding-left: 0px;
+    padding-right: inherit;
+}
+
+.SectionOneContainer {
+    padding-right: 30px;
+    padding-left: 30px;
 }
 
 .Row {
@@ -50,30 +54,30 @@ to {
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
-    padding: 20px 0 20px 0;
+    padding: 20px 0 0 0;
 }
 
 
 
 .SectionTwo {
-    margin: 20px 0 20px 0;
+    margin: 20px 30px 20px 30px;
     background-color: #F5F5F5;
 }
 
 .SectionTwoTitle {
     font-weight: 600;
-    margin-left: 55px;
+    margin-left: 30px;
     padding-top: 10px;
 }
 
 .SectionThreeTitle {
     font-weight: 600;
-    margin-left: 55px;
+    margin-left: 30px;
     padding-top: 10px;
 }
 
 .SectionThree {
-    margin: 20px 0 20px 0;
+    margin: 20px 30px 20px 30px;
     background-color: #F5F5F5;
 }
 
@@ -93,23 +97,130 @@ to {
     transition: all 0.3s;
     box-sizing: border-box;
 }
-
 .TrendingCol {
-    height: calc(38vw * .75);
-    overflow: scroll;
+    width: 100%;
+    max-width: 1500px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    -webkit-transition: height .5s linear;
+    -o-transition: height .5s linear;
+    transition: height .5s linear;
+    white-space: nowrap;
+    display: -ms-flexbox;
+    display: inline-block;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    margin-top: 30px;
 }
 
-.TrailerCol {
-    padding-right: '0';
-    max-width: '53.333333%';
+.ScrollWrapper {
+    display: flex;
+    overflow-x: scroll;
+    margin: 15px 15px 15px 0px;
+    scroll-behavior: smooth;
 }
 
 .TrendingTitle {
     display: inline-block;
-    margin-left: 30px;
+    margin-left: 20px;
 }
 
 .TrendingTitle span{
     font-size: 1.5em;
     font-weight: 550;
+}
+
+.ShowingFade {
+    overflow: scroll;
+    width: 60px;
+    height: 225px;
+    position: absolute;
+    right: 0;
+    margin-right: 30px;
+    z-index: 3;
+    opacity: 1;
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+    will-change: opacity;
+    transition: opacity 0.2s;
+}
+
+.HideFade {
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+
+
+
+
+
+
+@media(min-width: 992px) {
+    .TrendingCol {
+        height: calc(50vw * .75);
+        overflow-y: scroll;
+        overflow-x: hidden;
+        display: block;
+        margin-top: 0;
+    }
+
+    .TrendingFade {
+        height: calc(50vw * .75);
+        overflow: scroll;
+        margin-top: 20px;
+        width: 100%;
+        height: 10%;
+        position: absolute;
+        bottom: 0;
+        z-index: 3;
+        opacity: 1;
+        transition: opacity 0.2s;
+        background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+    }
+
+    .ScrollWrapper {
+        display: block;
+        margin: 0;
+    }
+
+    .HideFade {
+        opacity: 0;
+        transition: opacity 0.2s;
+    }
+
+    .ShowingFade {
+        overflow: scroll;
+        width: 60px;
+        height: 225px;
+        position: absolute;
+        right: 0;
+        z-index: 3;
+        margin-right: 0;
+        opacity: 1;
+        background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+        will-change: opacity;
+        transition: opacity 0.2s;
+    }
+
+
+    .TrendingTitle {
+        display: inline-block;
+        margin-left: 0;
+    }
+
+    .SectionTwoTitle {
+        margin-left: 55px;
+    }
+
+    .SectionThreeTitle {
+        margin-left: 55px;
+    }
+
+    .Row {
+        padding: 20px 0 20px 0;
+        position: relative;
+    }
+
 }

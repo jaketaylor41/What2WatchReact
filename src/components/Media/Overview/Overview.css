@@ -1,4 +1,4 @@
-
+/* Mobile */
 .OverviewDiv {
     position: relative;
 }
@@ -18,16 +18,9 @@
     display: inline-block;
 }
 
-.Title h3 {
+.Title p {
     margin-bottom: 0;
 }
-
-.Title p {
-    font-size: 12px;
-    margin-top: auto;
-    margin-bottom: auto;
-}
-
 
 .RatingWrapper {
     float: right;
@@ -69,4 +62,108 @@
 
 .Overview {
     padding: 20px 16px 16px 16px;
+}
+
+.TitleSubText {
+    font-size: 11px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+
+/* Mobile */
+@media(min-width: 320px) {
+
+    .Title {
+        max-width: 70%;
+    }
+
+    .Title p {
+        font-weight: 900;
+        font-size: 20px;
+    }
+
+    .TitleSubText {
+        max-width: 60%;
+    }
+
+    .TitleWrapper {
+        padding: 20px 10px 16px 10px;
+    }
+
+    .Overview {
+        height: 195px;
+        overflow: scroll;
+    } 
+
+    .Overview p {
+        font-size: 12px;
+    }
+
+    .RatingWrapper {
+        width: 68px;
+    }
+
+    .RatingWrapper i {
+        font-size: 17px;
+    }
+
+    .Rating {
+        padding: 2px 0 0 19px;
+    }
+
+    .RatingValue strong {
+        font-size: 16px;
+        font-weight: normal;
+        line-height: 24px;
+    }
+
+}
+
+/* Mobile */
+@media(min-width: 411px) {
+
+    .Title {
+        max-width: 75%;
+    }
+
+}
+
+
+
+
+
+/*   Desktop  */
+@media(min-width: 500px) {
+
+    .Title p {
+        font-weight: 900;
+        font-size: 24px;
+    }
+
+    .TitleSubText {
+        font-size: 12px;
+    }
+
+    .TitleWrapper {
+        padding: 20px 16px 16px 16px;
+    }
+
+    .RatingWrapper {
+        width: 100px;
+    }
+
+    .RatingWrapper i {
+        font-size: 24px;
+    }
+
+    .Rating {
+        padding: 2px 0 0 30px;
+    }
+
+    .RatingValue strong {
+        font-size: 24px;
+        font-weight: normal;
+        line-height: 24px;
+    }
 }

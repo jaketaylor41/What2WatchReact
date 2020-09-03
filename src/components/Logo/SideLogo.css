@@ -1,8 +1,7 @@
 .Logo {
-    background-color: transparent;
+    background-color: #343d52;
     height: 100%;
     box-sizing: border-box;
-    border-radius: 5px;
     margin: 0 auto;
     text-align: center;
 }

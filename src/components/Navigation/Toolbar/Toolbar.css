@@ -26,4 +26,9 @@
     .DesktopOnly {
         display: none;
     }
+
+    .Logo {
+        height: 80%;
+        margin: 0 auto;
+    }
 }

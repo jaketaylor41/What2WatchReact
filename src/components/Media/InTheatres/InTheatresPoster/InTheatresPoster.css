@@ -96,6 +96,36 @@
 }
 
 
+.RatingWrapper i {
+    float: left;
+    font-size: 20px;
+    margin-top: 5px;
+    color: #F5C518;
+}
+
+.Rating {
+    font-size: 11px;
+    height: 40px;
+    line-height: 13px;
+    padding: 2px 0 0 25px;
+}
+
+.RatingValue {
+    margin-bottom: -2px;
+    white-space: nowrap;
+}
+
+.RatingValue strong {
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 24px;
+}
+
+.Grey {
+    color: #6b6b6b;
+    font-size: 10px;
+}
+
 
 
 
@@ -155,8 +185,7 @@
     .RatingWrapper {
         float: left;
         position: relative;
-        margin-left: 5px;
-        width: 100px;
+        width: 100%;
         z-index: 2;
     }
     
@@ -222,7 +251,7 @@
     
     .Title {
         font-weight: 545;
-        font-size: 1em;
+        font-size: 15px;
         overflow-wrap: break-word;
         padding: 0;
         box-sizing: border-box;

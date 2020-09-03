@@ -7,6 +7,8 @@ import asyncComponent from './hoc/asyncComponent/asyncComponent';
 import Layout from './hoc/Layout/Layout';
 import Home from './containers/Home/Home';
 import Logout from './containers/Auth/Logout/Logout';
+import WatchList from './containers/WatchList/WatchList';
+import Auth from './containers/Auth/Auth';
 
 
 const asyncRandomMovie = asyncComponent(() => {
@@ -19,10 +21,6 @@ const asyncRandomTVShow = asyncComponent(() => {
 
 const asyncAuth = asyncComponent(() => {
   return import('./containers/Auth/Auth');
-});
-
-const asyncWatchList = asyncComponent(() => {
-  return import('./containers/WatchList/WatchList');
 });
 
 
@@ -40,7 +38,7 @@ class App extends Component {
       <Switch>
         <Route path="/sign-in" component={asyncAuth} />
         <Route path="/" exact component={Home} />
-        <Route path="/watch-list" component={asyncAuth} />
+        <Route path="/watch-list" component={Auth} />
         <Route path="/random-movie" component={asyncRandomMovie} />
         <Route path="/random-tv-show" component={asyncRandomTVShow} />
         <Redirect to="/" />
@@ -51,7 +49,7 @@ class App extends Component {
       routes = (
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/watch-list" component={asyncWatchList} />
+          <Route path="/watch-list" component={WatchList} />
           <Route path="/random-movie" component={asyncRandomMovie} />
           <Route path="/random-tv-show" component={asyncRandomTVShow} />
           <Route path="/logout" component={Logout} />

@@ -10,6 +10,7 @@
 
 .MyList {
     font-size: 1.5em;
+    margin: auto;
 }
 
 .Title {
@@ -17,7 +18,70 @@
     padding-bottom: 5vh;
 }
 
+.Title hr {
+    width: 100%;
+    float: left;
+}
+
 
 .AuthDiv {
     height: 100%;
+}
+
+.ItemCol {
+    margin-bottom: 4.5vh;
+}
+
+.Delete {
+    background: transparent;
+    border: none;
+    opacity: 0;
+    line-height: 1;
+    color: #000;
+    transition: color 0.15s ease-in-out;
+    outline: none;
+    font-size: 13px;
+}
+
+.ItemCol:hover .Delete{
+    opacity: 1;
+    transition: 0.3s all;
+}
+
+.Delete:focus {
+    outline: none;
+}
+
+.Delete:hover {
+    color: #ff0000;
+}
+
+.Delete i {
+    padding-right: 5px;
+}
+
+.RemoveBtnDiv {
+    display: inline-block;
+}
+
+.Row {
+    display: inline;
+}
+
+
+@media (min-width: 500px) {
+    .Row {
+        margin: 0 -15px 0 5%;
+        display: flex;
+    }
+
+    .Title hr {
+        width: 90%;
+        float: left;
+        margin-left: 80px;
+    }
+
+    .MyList {
+        margin: auto 0 0 80px;
+    }
 }

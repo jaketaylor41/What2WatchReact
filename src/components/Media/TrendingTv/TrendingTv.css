@@ -2,7 +2,6 @@
 .RatingWrapper {
     float: left;
     position: relative;
-    margin-left: 5px;
     width: 100px;
     z-index: 2;
 }
@@ -40,10 +39,7 @@
 
 
 .TrendingContainer {
-    margin-left: 26px;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    white-space: nowrap;
+    width: 100%;
 }
 
 .TitleContainer span {
@@ -54,7 +50,8 @@
 
 
 .TrendingWrapper{
-    width: 38vw;
+    width: 300px;
+    margin-left: 20px;
 }
 
 
@@ -66,19 +63,19 @@
     overflow: scroll;
     transition: all 300ms ease 0s;
     background-color: #F5F5F5;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 
 .Slot {
-    width: 88px;
+    width: 67px;
 }
 
 .InfoContainer {
     position: absolute;
     top: 0px;
     right: 0px;
-    left: 118px;
+    left: 92px;
     padding: 18px 8px 0px;
     overflow: hidden;
     text-decoration: none;
@@ -100,8 +97,8 @@
 
 .PosterContainer {
     width: 100%;
-    min-height: calc(88px * 1.5);
-    height: calc(88px * 1.5);
+    min-height: calc(67px * 1.5);
+    height: calc(67px * 1.5);
     overflow: hidden;
     -webkit-box-shadow: 0 8px 17px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
     box-shadow: 0 8px 17px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
@@ -146,4 +143,30 @@
 
 .Overlay:hover{
     opacity: 1;
+}
+
+.Grey {
+    color: #6b6b6b;
+    font-size: 10px;
+}
+
+
+@media(min-width: 992px) {
+
+    .TrendingWrapper{
+        width: 38vw;
+    }
+
+    .TrendingContainer {
+        overflow-x: hidden;
+        overflow-y: scroll;
+        white-space: nowrap;
+    }
+
+    .TrendingWrapper{
+        width: 100%;
+        margin-left: 0;
+    }
+    
+
 }

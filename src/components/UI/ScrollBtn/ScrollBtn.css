@@ -1,0 +1,38 @@
+.ScrollBtnDiv {
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    margin: 40px 10px 0 0;
+    text-align: center;
+    z-index: 2;
+}
+
+.ScrollBtn {
+    background: rgba(0,0,0,0.5);
+    border: 1px solid #ffffff;
+    font-size: 30px;
+    border-radius: 5px;
+    padding: 10px;
+    line-height: 1;
+    color: white;
+    outline: none;
+}
+
+.ScrollBtn:focus {
+    outline: none;
+}
+
+.ScrollBtn:hover i {
+    color: #F5C518;
+    transition: 0.3s all;
+}
+
+@media (min-width: 992px) {
+    .ScrollBtnDiv {
+        display: none;
+    }
+    
+    .ScrollBtn {
+        display: none;
+    }
+}

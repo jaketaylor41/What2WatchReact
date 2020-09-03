@@ -5,7 +5,9 @@ import classes from './SideLogo.css';
 const sideLogo = (props) => (
 
     <div className={classes.Logo}>
-        <img src={w2wIcon} alt="W2W" />
+        <a href="/">
+            <img src={w2wIcon} alt="W2W" />
+        </a>
     </div>
 
 

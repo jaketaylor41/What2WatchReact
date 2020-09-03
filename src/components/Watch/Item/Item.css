@@ -16,6 +16,29 @@
     margin-bottom: 4.5vw;
     -webkit-box-shadow: 0 8px 17px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
     box-shadow: 0 8px 17px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
+    transition: 0.4s all ease-in-out;
+    animation-name: fadeIn;
+    animation-duration: 0.3s;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+}
+
+.PosterLoading {
+    width: 100%;
+    min-height: calc(185px * 1.5);
+    height: calc(185px * 1.5);
+    background-color: #f5f5f5;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 4.5vw;
+    -webkit-box-shadow: 0 8px 17px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
+    box-shadow: 0 8px 17px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
+    transition: 0.4s all ease-in-out;
+    animation-name: sharpen;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
 }
 
 .Wrapper {
@@ -60,9 +83,10 @@
     background: transparent;
     border: 1px solid #fff;
     border-radius: 50%;
-    padding: 1rem 1.3rem;
+    padding: 5px;
+    width: 25px;
     line-height: 1;
-    font-size: 2rem;
+    font-size: .8em;
     color: #fff;
     transition: color 0.15s ease-in-out;
     outline: none;
@@ -78,7 +102,10 @@
 
 .RemoveBtnDiv {
     display: inline-block;
-    margin-top: 50%;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: 0 5px 10px 5px;
 }
 
 .Load {
@@ -95,36 +122,61 @@
     -webkit-transition : -webkit-filter 500ms linear
 }
 
+
+.WatchListWrapper .PosterContainer:hover {
+    transform: scale(1.5);
+    z-index: 5;
+}
+
+
+.OverlayShadow {
+    position: absolute;
+    height: 100px;
+    min-width: 0px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
+}
+
+.ItemInfo {
+    padding: 0 5px 10px 10px;
+    color: #fff;
+    position: absolute;
+    bottom: 0;
+    margin: auto;
+    text-align: left;
+    max-width: 150px;
+}
+
+
+.ItemTitle {
+    font-size: 13px;
+    margin: auto;
+}
+
+.ItemDuration {
+    margin: auto;
+}
+
+.ItemMpaa, .ItemDuration {
+    font-size: 8px;
+    display: inline-block;
+}
+
+.ItemMpaa {
+    margin: auto 5px auto auto;
+    padding: 2px;
+    border: 1px solid;
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
 @keyframes sharpen {
-    from {
-        filter: blur(5px);
-    }
-    to {
-        filter: blur(none);
-    }
+    0%   {filter: blur(none)}
+    100% {filter: blur(8px)}
 }
 
-
-@media screen and (max-width: 799px) and (min-width: 500px) {
-    .RowItem {
-        width: 33.333333%;
-    }
-}
-
-@media screen and (max-width: 1099px) and (min-width: 800px) {
-    .RowItem {
-        width: 25%;
-    }
-}
-
-@media screen and (max-width: 1399px) and (min-width: 1100px) {
-    .RowItem {
-        width: 20%;
-    }
-}
-
-@media screen and (min-width: 1400px) {
-    .RowItem {
-        width: 16.66666667%;
-    }
+@keyframes fadeIn {
+    0%   {filter: blur(8px)}
+    100% {filter: blur(none)}
 }

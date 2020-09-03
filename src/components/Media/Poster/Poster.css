@@ -1,13 +1,11 @@
-
-
-
+    /* Mobile */
     .ShuffleDiv {
         width: 100%;
     }
-
+    
     .DivWrapper {
-        width: 400px;
-        min-width: 400px;
+        width: 300px;
+        min-width: 300px;
         background: transparent;
         border: none;
         overflow: visible;
@@ -15,8 +13,22 @@
         left: 0;
         right: 0;
         top: 0;
-        margin: -19px auto;
+        margin: 115px auto;
     }
+    
+    .LoadingWrapper {
+        width: 300px;
+        min-width: 300px;
+        background-color: #f5f5f5;
+        border: none;
+        overflow: visible;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        margin: 115px auto;
+    }
+
 
     .Poster {
         cursor: pointer;
@@ -33,8 +45,8 @@
 
     .PosterContainer {
         width: 100%;
-        min-height: calc(400px * 1.5);
-        height: calc(400px * 1.5);
+        min-height: calc(300px * 1.5);
+        height: calc(300px * 1.5);
         border-radius: 5px;
         overflow: hidden;
         -webkit-box-shadow: 0 8px 17px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
@@ -45,14 +57,26 @@
         animation-timing-function: ease-in-out;
     }
 
-    @keyframes fadeIn {
-        from {
-            filter: blur(8px);
-        }
-        to {
-            filter: blur(none);
-        }
+
+
+    .PosterLoading {
+        width: 100%;
+        min-height: calc(300px * 1.5);
+        height: calc(300px * 1.5);
+        border-radius: 5px;
+        overflow: hidden;
+        background-color: #f5f5f5;
+        background-size: contain;
+        background-repeat: none;
+        -webkit-box-shadow: 0 8px 17px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
+        box-shadow: 0 8px 17px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
+        animation-name: sharpen;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+        animation-timing-function: ease-in-out;
     }
+
 
     .PosterWrapper {
         width: 100%;
@@ -99,6 +123,129 @@
         opacity: 0.7;
     }
 
+    
+    .Section {
+        animation-name: fadeIn;
+        height: calc(600px * .5625);
+        width: 100%;
+        animation-duration: 0.3s;
+        animation-direction: alternate;
+        animation-timing-function: ease-in-out;
+    }
+    
+    .LoadingSection {
+        background-color: #f5f5f5;
+        animation-name: sharpen;
+        height: calc(600px * .5625);
+        width: 100%;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+        animation-timing-function: ease-in-out;
+    }
+
+    /* Mobile */
+    @media (min-width: 320px) {
+    
+        .DivWrapper {
+            width: 200px;
+            min-width: 200px;
+        }
+        
+        .LoadingWrapper {
+            width: 200px;
+            min-width: 200px;
+        }
+
+        .PosterContainer {
+            min-height: calc(200px * 1.5);
+            height: calc(200px * 1.5);
+        }
+
+        .PosterLoading {
+            min-height: calc(200px * 1.5);
+            height: calc(200px * 1.5);
+        }
+            
+    }
+    
+    
+    
+    /* Mobile */
+    @media (min-width: 360px) {
+        
+        .DivWrapper {
+            width: 250px;
+            min-width: 250px;
+        }
+        
+        .LoadingWrapper {
+            width: 250px;
+            min-width: 250px;
+        }
+
+        .PosterContainer {
+            min-height: calc(250px * 1.5);
+            height: calc(250px * 1.5);
+        }
+
+        .PosterLoading {
+            min-height: calc(250px * 1.5);
+            height: calc(250px * 1.5);
+        }
+           
+    }
+    
+    
+    
+    
+
+
+
+
+
+
+
+
+
+/*   Desktop  */
+    @media(min-width: 500px) {
+
+        .DivWrapper {
+            width: 400px;
+            min-width: 400px;
+            margin: -19px auto;
+        }
+
+        .Section {
+            height: calc(1000px * .5625);
+        }
+    
+        .LoadingSection {
+            height: calc(1000px * .5625);
+        }
+
+        .LoadingWrapper {
+            width: 400px;
+            min-width: 400px;
+            margin: -19px auto;
+        }
+    
+        .PosterLoading {
+            min-height: calc(400px * 1.5);
+            height: calc(400px * 1.5);
+        }
+
+        .PosterContainer {
+            min-height: calc(400px * 1.5);
+            height: calc(400px * 1.5);
+        }
+
+        .Backdrop {
+            height: calc(400px * 1.5);
+        }
+    
+    }
 
 
     @media (min-width: 500px) {
@@ -116,60 +263,18 @@
         }
     }
 
-    .LoadingWrapper {
-        width: 400px;
-        min-width: 400px;
-        background-color: #f5f5f5;
-        border: none;
-        overflow: visible;
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
-        margin: -19px auto;
-    }
 
-    .PosterLoading {
-        width: 100%;
-        min-height: calc(400px * 1.5);
-        height: calc(400px * 1.5);
-        border-radius: 5px;
-        overflow: hidden;
-        background-color: #f5f5f5;
-        background-image: url('/src/assets/images/moviesBg.jpg');
-        background-size: contain;
-        background-repeat: none;
-        -webkit-box-shadow: 0 8px 17px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
-        box-shadow: 0 8px 17px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
-        animation-name: sharpen;
-        animation-duration: 1s;
-        animation-iteration-count: infinite;
-        animation-direction: alternate;
-        animation-timing-function: ease-in-out;
-    }
 
+    @keyframes fadeIn {
+        from {
+            filter: blur(8px);
+        }
+        to {
+            filter: blur(none);
+        }
+    }
 
     @keyframes sharpen {
         0%   {filter: blur(none)}
         100% {filter: blur(8px)}
-    }
-
-    .Section {
-        animation-name: fadeIn;
-        height: calc(1000px * .5625);
-        width: 100%;
-        animation-duration: 0.3s;
-        animation-direction: alternate;
-        animation-timing-function: ease-in-out;
-    }
-
-    .LoadingSection {
-        background-color: #f5f5f5;
-        animation-name: sharpen;
-        height: calc(1000px * .5625);
-        width: 100%;
-        animation-duration: 1s;
-        animation-iteration-count: infinite;
-        animation-direction: alternate;
-        animation-timing-function: ease-in-out;
     }

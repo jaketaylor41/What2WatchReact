@@ -11,7 +11,8 @@ const navigationItem = (props) => (
     <li className={classes.NavigationItem}>
         <NavLink 
         to={props.link}
-        exact={props.exact} 
+        exact={props.exact}
+        onClick={props.clicked} 
         activeClassName={classes.active}>{props.children}</NavLink>
     </li>
     </Ripples>

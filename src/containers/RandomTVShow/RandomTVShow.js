@@ -31,6 +31,7 @@ class RandomTVshow extends Component {
     toggleMovieHandler = () => {
         
         this.setState({loading: true});
+        this.setState({alreadyAdded: false});
         this.props.onFetchRandomShow();
         
         setTimeout(() => {
@@ -59,6 +60,9 @@ class RandomTVshow extends Component {
             const watchData = {
                 id: this.props.randomShow.id,
                 poster: this.props.randomShow.poster_path,
+                title: this.props.randomShow.name,
+                mpaa: this.props.randomShow.mpaa ? this.props.randomShow.mpaa : 'NR',
+                duration: this.convertDuration(this.props.randomShow.episode_run_time),
                 userId: this.props.userId
             }
     

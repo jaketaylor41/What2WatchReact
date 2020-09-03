@@ -1,9 +1,11 @@
 
+
 /* Mobile */
 @media (min-width: 320px) {
     .ShowContainer {
         position: relative;
-        height: 240px;
+        height: 455px;
+        padding-top: 97px;
     }
 }
 
@@ -11,7 +13,8 @@
 @media (min-width: 360px) {
     .ShowContainer {
         position: relative;
-        height: 280px;
+        height: 515px;
+        padding-top: 135px;
     }
 }
 
@@ -19,7 +22,9 @@
 @media (width: 375px) and (height: 812px) {
     .ShowContainer {
         position: relative;
-        height: 350px;
+        height: 597px;
+        padding-top: 134px;
+    
     }
 }
 
@@ -27,25 +32,27 @@
 @media (width: 411px) and (height: 823px) {
     .ShowContainer {
         position: relative;
-        height: 350px;
+        height: 580px;
     }
 }
 
 
 /* Mobile */
-@media (min-width: 411px) {
+@media (width: 411px) and (height: 731px) {
     .ShowContainer {
         position: relative;
+        height: 560px;
     }
 }
 
 /* Mobile */
-@media (min-width: 414px) {
+@media (min-width: 414px) and (height: 736px) {
     .ShowContainer {
         position: relative;
-        height: 350px;
+        height: 570px;
     }
 }
+
 
 /*   Desktop  */
 @media (min-width: 500px) {
