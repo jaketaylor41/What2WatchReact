@@ -51,7 +51,7 @@
 
 .TrendingWrapper{
     width: 300px;
-    margin-left: 20px;
+    margin-left: 15px;
 }
 
 
@@ -150,12 +150,17 @@
     font-size: 10px;
 }
 
+/*===================================================== DESKTOP ============================================================= */
+
+@media (min-width: 500px) {
+    .TrendingWrapper{
+        width: 300px;
+        margin-left: 20px;
+    }
+}
+
 
 @media(min-width: 992px) {
-
-    .TrendingWrapper{
-        width: 38vw;
-    }
 
     .TrendingContainer {
         overflow-x: hidden;

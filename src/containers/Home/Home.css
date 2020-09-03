@@ -19,15 +19,6 @@
     max-width: 100%;
 }
 
-@keyframes sharpen {
-from {
-    filter: blur(50px);
-}
-to {
-    filter: blur(none);
-}
-}
-
 .Container {
     width: auto;
     display: flex;
@@ -37,11 +28,6 @@ to {
     align-content: flex-start;
     padding-left: 0px;
     padding-right: inherit;
-}
-
-.SectionOneContainer {
-    padding-right: 30px;
-    padding-left: 30px;
 }
 
 .Row {
@@ -156,6 +142,15 @@ to {
 
 
 
+/*===================================================== DESKTOP ============================================================= */
+
+@media (min-width: 500px) {
+    .SectionOneContainer {
+        padding-right: 30px;
+        padding-left: 30px;
+    }
+}
+
 
 @media(min-width: 992px) {
     .TrendingCol {
@@ -223,4 +218,13 @@ to {
         position: relative;
     }
 
+}
+
+@keyframes sharpen {
+    from {
+        filter: blur(50px);
+    }
+    to {
+        filter: blur(none);
+    }
 }
