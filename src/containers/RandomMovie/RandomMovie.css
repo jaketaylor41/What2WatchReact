@@ -52,6 +52,15 @@
     }
 }
 
+/* Mobile */
+@media (min-width: 414px) and (height: 896px) {
+    .MovieContainer {
+        position: relative;
+        height: 570px;
+    }
+}
+
+
 
 
 
