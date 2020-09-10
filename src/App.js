@@ -54,7 +54,7 @@ class App extends Component {
           <Route path="/random-tv-show" component={asyncRandomTVShow} />
           <Route path="/logout" component={Logout} />
           <Redirect to="/" />
-      </Switch>
+        </Switch>
       );
     }
 
