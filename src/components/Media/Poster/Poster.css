@@ -212,37 +212,33 @@
     @media(min-width: 500px) {
 
         .DivWrapper {
-            width: 400px;
-            min-width: 400px;
+            width: 370px;
+            min-width: 370px;
             margin: -19px auto;
         }
 
         .Section {
-            height: calc(1000px * .5625);
+            height: calc(900px * .5625);
         }
     
         .LoadingSection {
-            height: calc(1000px * .5625);
+            height: calc(900px * .5625);
         }
 
         .LoadingWrapper {
-            width: 400px;
-            min-width: 400px;
+            width: 370px;
+            min-width: 370px;
             margin: -19px auto;
         }
     
         .PosterLoading {
-            min-height: calc(400px * 1.5);
-            height: calc(400px * 1.5);
+            min-height: calc(370px * 1.5);
+            height: calc(370px * 1.5);
         }
 
         .PosterContainer {
-            min-height: calc(400px * 1.5);
-            height: calc(400px * 1.5);
-        }
-
-        .Backdrop {
-            height: calc(400px * 1.5);
+            min-height: calc(370px * 1.5);
+            height: calc(370px * 1.5);
         }
     
     }
